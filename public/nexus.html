@@ -1970,6 +1970,418 @@
         .project-member:first-child {
             margin-left: 0;
         }
+
+        /* ===== BACK BUTTON ===== */
+        .back-btn {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-right: 4px;
+        }
+        .back-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: var(--bg-hover);
+        }
+        .back-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .back-btn svg { width: 16px; height: 16px; }
+
+        /* ===== MONTHLY MOOD CALENDAR ===== */
+        .mood-calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .mood-cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            position: relative;
+            background: var(--input-bg);
+        }
+        .mood-cal-day:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+        }
+        .mood-cal-day.has-mood { border-color: var(--border-glow); }
+        .mood-cal-day.today-mood {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(139,92,246,0.2);
+        }
+        .mood-cal-day.empty-mood {
+            background: transparent;
+            cursor: default;
+            border: none;
+        }
+        .mood-cal-day.empty-mood:hover { transform: none; }
+
+        /* Journal Popup */
+        .journal-popup-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .journal-popup-overlay.show { display: flex; }
+        .journal-popup {
+            width: 400px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .journal-popup h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .journal-popup textarea {
+            width: 100%;
+            min-height: 120px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            padding: 12px;
+            font-size: 13px;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 12px;
+        }
+        .journal-popup textarea:focus { border-color: var(--accent-primary); }
+
+        /* ===== EARN FOCUS (Glass Jar) ===== */
+        .earn-focus-container { text-align: center; padding: 10px; }
+        .glass-jar {
+            width: 120px;
+            height: 160px;
+            margin: 0 auto 16px;
+            border: 3px solid var(--border-glow);
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(139,92,246,0.05);
+            backdrop-filter: blur(10px);
+        }
+        .glass-jar::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: var(--border-glow);
+            border-radius: 4px;
+        }
+        .glass-jar-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(251,191,36,0.3), rgba(251,191,36,0.6));
+            transition: height 0.5s ease;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-end;
+            justify-content: center;
+            gap: 2px;
+            padding: 4px;
+        }
+        .coin-icon {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            border: 1px solid #d97706;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: coinDrop 0.3s ease;
+        }
+        @keyframes coinDrop {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .earn-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 12px;
+        }
+        .earn-stat { text-align: center; }
+        .earn-stat-val { font-size: 18px; font-weight: 700; color: var(--accent-yellow); }
+        .earn-stat-label { font-size: 10px; color: var(--text-muted); }
+
+        /* ===== KNOWLEDGE GRAPH CANVAS ===== */
+        .kg-canvas-container {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+        .kg-canvas-container canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .kg-info-panel {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            right: 8px;
+            background: var(--popup-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 12px;
+            display: none;
+        }
+        .kg-info-panel.show { display: block; }
+
+        /* ===== TASK GRAVITY ===== */
+        .gravity-badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .gravity-critical { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+        .gravity-high { background: rgba(251,146,60,0.15); color: var(--accent-orange); }
+        .gravity-medium { background: rgba(251,191,36,0.15); color: var(--accent-yellow); }
+
+        /* ===== RESOURCE SHELF ===== */
+        .resource-shelf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        .resource-shelf-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .resource-shelf-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .resource-shelf-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .resource-shelf-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .resource-shelf-meta { font-size: 11px; color: var(--text-muted); }
+        .resource-search-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .resource-search-input {
+            flex: 1;
+            padding: 10px 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+        }
+        .resource-search-input:focus { border-color: var(--accent-primary); }
+        .resource-filter-chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .filter-chip {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        .filter-chip:hover, .filter-chip.active {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: var(--bg-hover);
+        }
+
+        /* PDF Preview Modal */
+        .pdf-preview-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .pdf-preview-overlay.show { display: flex; }
+        .pdf-preview-modal {
+            width: 80%;
+            max-width: 900px;
+            height: 80vh;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+        .pdf-preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .pdf-preview-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Enhanced Subject Health Animations */
+        .subject-card .progress-track {
+            position: relative;
+            overflow: hidden;
+        }
+        .subject-card .progress-fill {
+            animation: healthPulse 2s ease-in-out infinite alternate;
+        }
+        @keyframes healthPulse {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        }
+        .subject-card:hover .progress-fill {
+            box-shadow: 0 0 12px currentColor;
+        }
+        .subject-3d {
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+        .subject-card:hover {
+            transform: translateY(-2px) rotateX(2deg);
+        }
+
+        /* Enhanced Teacher Form Cards */
+        .teacher-form-enhanced {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .teacher-form-enhanced .form-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+        .teacher-form-enhanced .form-group:hover {
+            border-color: var(--border-glow);
+        }
+        .teacher-form-enhanced .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Reminder Section */
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+        .reminder-item:hover { border-color: var(--border-glow); }
+        .reminder-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .reminder-content { flex: 1; }
+        .reminder-title { font-size: 13px; font-weight: 600; }
+        .reminder-time { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+        /* Focus Resources in Live Lecture */
+        .focus-resources {
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+        .focus-resource-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            background: var(--input-bg);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 12px;
+        }
+        .focus-resource-item:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent-primary);
+        }
     </style>
 </head>
 <body>
@@ -1977,6 +2389,9 @@
 <!-- TOP BAR -->
 <div class="top-bar">
     <div class="top-bar-left">
+        <button class="back-btn" id="backBtn" onclick="goBack()" title="Go Back" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </button>
         <div class="logo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/><polyline points="2 15.5 12 8.5 22 15.5"/><line x1="12" y1="2" x2="12" y2="8.5"/></svg>
             <div class="logo-text">Nexus-Uni <span>Scholar's Command Center</span></div>
@@ -2110,6 +2525,45 @@
                 Lecture Notes
             </div>
             <textarea placeholder="Start taking notes...&#10;&#10;• Binary tree properties&#10;• In-order traversal: Left → Root → Right&#10;• Pre-order traversal: Root → Left → Right&#10;• Time complexity: O(n)"></textarea>
+            <div class="focus-resources">
+                <div style="font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                    Lecture Resources
+                </div>
+                <div class="focus-resource-item" onclick="openPdfPreview('Binary Trees Formula Sheet')">📄 Binary Trees Formula Sheet <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
+                <div class="focus-resource-item" onclick="openPdfPreview('Traversal Algorithms Cheat Sheet')">📄 Traversal Algorithms Cheat Sheet <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
+                <div class="focus-resource-item" onclick="openPdfPreview('Time Complexity Reference')">📊 Time Complexity Reference <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PDF Preview Modal -->
+<div class="pdf-preview-overlay" id="pdfPreviewOverlay" onclick="if(event.target===this)closePdfPreview()">
+    <div class="pdf-preview-modal">
+        <div class="pdf-preview-header">
+            <div style="font-size:14px;font-weight:600" id="pdfPreviewTitle">Document Preview</div>
+            <button class="btn" onclick="closePdfPreview()">✕ Close</button>
+        </div>
+        <div class="pdf-preview-body">
+            <div style="text-align:center">
+                <div style="font-size:48px;margin-bottom:12px">📄</div>
+                <div style="font-size:16px;font-weight:600;margin-bottom:4px" id="pdfPreviewName">Document</div>
+                <div style="font-size:13px;color:var(--text-muted)">PDF preview would render here in production</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Journal Popup -->
+<div class="journal-popup-overlay" id="journalOverlay" onclick="if(event.target===this)closeJournal()">
+    <div class="journal-popup">
+        <h3>📝 Journal — <span id="journalDate">Jan 15</span></h3>
+        <div id="journalMoodDisplay" style="font-size:13px;color:var(--text-secondary);margin-bottom:10px"></div>
+        <textarea id="journalTextarea" placeholder="How was your day? Write your thoughts..."></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn" onclick="closeJournal()">Cancel</button>
+            <button class="btn primary" onclick="saveJournal()">Save Entry</button>
         </div>
     </div>
 </div>
@@ -2136,9 +2590,9 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span class="tooltip">Pomodoro Timer</span>
         </div>
-        <div class="resource-item" draggable="true" onclick="openPopup('forest')" ondragstart="dragStart(event, 'forest')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 14l3-6h-5l3-6H6l-3 8h5l-3 8h12z"/></svg>
-            <span class="tooltip">Forest Focus</span>
+        <div class="resource-item" draggable="true" onclick="openPopup('earnFocus')" ondragstart="dragStart(event, 'earnFocus')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+            <span class="tooltip">Earn Focus</span>
         </div>
     </div>
 
@@ -2236,6 +2690,10 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             Group Projects
         </div>
+        <div class="nav-item" onclick="navigateTo('class', 'resourceShelf')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Resource Shelf
+        </div>
         <div class="nav-item" onclick="navigateTo('class', 'timetable')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             Time Table
@@ -2256,7 +2714,7 @@
         <div class="nav-section-title">Actions</div>
         <div class="nav-item active" onclick="navigateTo('teacher', 'teacherHome')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-            Dashboard
+            Home
         </div>
         <div class="nav-item" onclick="navigateTo('teacher', 'attendance')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
@@ -2476,13 +2934,13 @@
                         <div class="card-header">
                             <div class="card-title">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 14l3-6h-5l3-6H6l-3 8h5l-3 8h12z"/></svg>
-                                Quick Focus
+                                Earn Focus
                             </div>
                         </div>
                         <div style="text-align:center;padding:10px">
-                            <div style="font-size:32px;margin-bottom:8px">🌲</div>
-                            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Plant a tree and stay focused</div>
-                            <button class="btn primary" onclick="openPopup('forest')">Start Growing</button>
+                            <div style="font-size:32px;margin-bottom:8px">🪙</div>
+                            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Earn coins by staying focused</div>
+                            <button class="btn primary" onclick="openPopup('earnFocus')">Start Earning</button>
                         </div>
                     </div>
                 </div>
@@ -2687,17 +3145,22 @@
 
                     <div class="card" style="margin-top:16px">
                         <div class="card-header">
-                            <div class="card-title">📊 Weekly Mood Tracker</div>
+                            <div class="card-title">📅 Monthly Mood Calendar</div>
+                            <span class="card-action" id="moodCalMonth">January 2025</span>
                         </div>
-                        <div class="weekly-chart">
-                            <div class="chart-bar" style="height:70%;background:var(--accent-green)"><span class="chart-bar-label">Mon</span></div>
-                            <div class="chart-bar" style="height:85%;background:var(--accent-cyan)"><span class="chart-bar-label">Tue</span></div>
-                            <div class="chart-bar" style="height:60%;background:var(--accent-orange)"><span class="chart-bar-label">Wed</span></div>
-                            <div class="chart-bar" style="height:90%;background:var(--accent-green)"><span class="chart-bar-label">Thu</span></div>
-                            <div class="chart-bar" style="height:75%;background:var(--accent-cyan)"><span class="chart-bar-label">Fri</span></div>
-                            <div class="chart-bar" style="height:80%;background:var(--accent-primary)"><span class="chart-bar-label">Sat</span></div>
-                            <div class="chart-bar" style="height:45%;background:var(--accent-orange)"><span class="chart-bar-label">Sun</span></div>
+                        <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😄')" title="Great">😄</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('🙂')" title="Good">🙂</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😐')" title="Okay">😐</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😔')" title="Low">😔</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😰')" title="Stressed">😰</span>
                         </div>
+                        <div id="selectedMoodLabel" style="text-align:center;font-size:11px;color:var(--accent-primary);margin-bottom:6px">Select a mood, then click a date</div>
+                        <div class="mood-calendar-grid">
+                            <div class="cal-header">Mo</div><div class="cal-header">Tu</div><div class="cal-header">We</div><div class="cal-header">Th</div><div class="cal-header">Fr</div><div class="cal-header">Sa</div><div class="cal-header">Su</div>
+                        </div>
+                        <div class="mood-calendar-grid" id="moodCalendarGrid"></div>
+                        <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-top:8px">Click a date to add journal entry</div>
                     </div>
                 </div>
 
@@ -2895,7 +3358,7 @@
         <!-- ===== SUBJECT PRIORITY ===== -->
         <div class="page-view" id="page-subjectPriority">
             <div class="page-header">
-                <div class="page-title">Subject Prioritization</div>
+                <div class="page-title">Priority Hub</div>
             </div>
             <div class="card" style="margin-bottom:16px">
                 <div class="card-header"><div class="card-title">🎯 Focus Recommendations</div></div>
@@ -2939,6 +3402,41 @@
                         <div class="priority-reason">🌟 Excellent! You're ahead of the class.</div>
                     </div>
                     <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:92%;background:var(--accent-cyan)"></div></div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+                <div class="card-header"><div class="card-title">🌀 Task Gravity System</div></div>
+                <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Tasks ranked by urgency weight — higher gravity = needs immediate attention</p>
+                <div class="priority-card" style="border-left:3px solid var(--accent-red)">
+                    <div style="flex:1">
+                        <div style="font-size:13px;font-weight:600">Math Quiz — Due Today (25% weight)</div>
+                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Machine Learning • Prof. Williams</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div style="font-family:'JetBrains Mono';font-size:18px;font-weight:700;color:var(--accent-red)">95°</div>
+                        <span class="gravity-badge gravity-critical">Critical</span>
+                    </div>
+                </div>
+                <div class="priority-card" style="border-left:3px solid var(--accent-orange)">
+                    <div style="flex:1">
+                        <div style="font-size:13px;font-weight:600">OS Lab Report — Due Tomorrow (20% weight)</div>
+                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Operating Systems • Dr. Wilson</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div style="font-family:'JetBrains Mono';font-size:18px;font-weight:700;color:var(--accent-orange)">78°</div>
+                        <span class="gravity-badge gravity-high">High</span>
+                    </div>
+                </div>
+                <div class="priority-card" style="border-left:3px solid var(--accent-yellow)">
+                    <div style="flex:1">
+                        <div style="font-size:13px;font-weight:600">ML Project Phase 2 — Due in 3 days (30% weight)</div>
+                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Machine Learning • Team Project</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div style="font-family:'JetBrains Mono';font-size:18px;font-weight:700;color:var(--accent-yellow)">52°</div>
+                        <span class="gravity-badge gravity-medium">Medium</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2990,6 +3488,56 @@
                     </div>
                 </div>
                 <div style="font-size:11px;color:var(--text-muted);margin-top:8px">Mentor: Dr. Wilson • Due: Mar 1, 2025</div>
+            </div>
+        </div>
+
+        <!-- ===== RESOURCE SHELF ===== -->
+        <div class="page-view" id="page-resourceShelf">
+            <div class="page-header">
+                <div class="page-title">Resource Shelf</div>
+            </div>
+            <div class="resource-search-bar">
+                <input type="text" class="resource-search-input" placeholder="Search resources..." oninput="filterResources(this.value)">
+                <button class="btn primary" onclick="alert('Upload resource')">Upload</button>
+            </div>
+            <div class="resource-filter-chips">
+                <div class="filter-chip active" onclick="filterByType(this,'all')">All</div>
+                <div class="filter-chip" onclick="filterByType(this,'pdf')">PDF</div>
+                <div class="filter-chip" onclick="filterByType(this,'slides')">Slides</div>
+                <div class="filter-chip" onclick="filterByType(this,'video')">Video</div>
+                <div class="filter-chip" onclick="filterByType(this,'notes')">Notes</div>
+            </div>
+            <div class="resource-shelf-grid" id="resourceShelfGrid">
+                <div class="resource-shelf-card" data-type="pdf" onclick="openPdfPreview('DSA Chapter 5 — Trees & Graphs')">
+                    <div class="resource-shelf-icon" style="background:rgba(239,68,68,0.15)">📄</div>
+                    <div class="resource-shelf-name">DSA Chapter 5 — Trees & Graphs</div>
+                    <div class="resource-shelf-meta">PDF • Dr. Sarah Chen • 2.4 MB</div>
+                </div>
+                <div class="resource-shelf-card" data-type="slides" onclick="openPdfPreview('ML Lecture 8 — Neural Networks')">
+                    <div class="resource-shelf-icon" style="background:rgba(251,146,60,0.15)">📊</div>
+                    <div class="resource-shelf-name">ML Lecture 8 — Neural Networks</div>
+                    <div class="resource-shelf-meta">PPTX • Prof. Williams • 5.1 MB</div>
+                </div>
+                <div class="resource-shelf-card" data-type="pdf" onclick="openPdfPreview('OS Process Scheduling Notes')">
+                    <div class="resource-shelf-icon" style="background:rgba(34,211,238,0.15)">📄</div>
+                    <div class="resource-shelf-name">OS Process Scheduling Notes</div>
+                    <div class="resource-shelf-meta">PDF • Dr. Wilson • 1.8 MB</div>
+                </div>
+                <div class="resource-shelf-card" data-type="video" onclick="alert('Playing video...')">
+                    <div class="resource-shelf-icon" style="background:rgba(52,211,153,0.15)">🎬</div>
+                    <div class="resource-shelf-name">Sorting Algorithms Visualized</div>
+                    <div class="resource-shelf-meta">MP4 • 15 min • 45 MB</div>
+                </div>
+                <div class="resource-shelf-card" data-type="notes" onclick="openPdfPreview('Computer Networks Formula Sheet')">
+                    <div class="resource-shelf-icon" style="background:rgba(244,114,182,0.15)">📝</div>
+                    <div class="resource-shelf-name">Computer Networks Formula Sheet</div>
+                    <div class="resource-shelf-meta">PDF • Dr. Lee • 0.5 MB</div>
+                </div>
+                <div class="resource-shelf-card" data-type="pdf" onclick="openPdfPreview('Software Eng — Design Patterns')">
+                    <div class="resource-shelf-icon" style="background:rgba(139,92,246,0.15)">📄</div>
+                    <div class="resource-shelf-name">Software Eng — Design Patterns</div>
+                    <div class="resource-shelf-meta">PDF • Dr. Davis • 3.2 MB</div>
+                </div>
             </div>
         </div>
 
@@ -3126,6 +3674,67 @@
                     <div class="teacher-card-desc">Answer student questions</div>
                 </div>
             </div>
+
+            <div class="dashboard-grid" style="margin-top:20px">
+                <div style="grid-column:1/2">
+                    <div class="card animate-in">
+                        <div class="card-header">
+                            <div class="card-title">🔔 Reminders</div>
+                            <span class="card-action">Add New</span>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-icon" style="background:rgba(239,68,68,0.15)">🎓</div>
+                            <div class="reminder-content">
+                                <div class="reminder-title">Lecture at 3 PM</div>
+                                <div class="reminder-time">Machine Learning — Lab 5</div>
+                            </div>
+                            <span class="gravity-badge gravity-critical">Soon</span>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-icon" style="background:rgba(251,146,60,0.15)">📝</div>
+                            <div class="reminder-content">
+                                <div class="reminder-title">Give marks for DSA Lab #3</div>
+                                <div class="reminder-time">12 submissions pending</div>
+                            </div>
+                            <span class="gravity-badge gravity-high">Today</span>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-icon" style="background:rgba(139,92,246,0.15)">✅</div>
+                            <div class="reminder-content">
+                                <div class="reminder-title">Mark attendance for OS class</div>
+                                <div class="reminder-time">Section A — 42 students</div>
+                            </div>
+                            <span class="gravity-badge gravity-medium">Pending</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card animate-in" style="margin-bottom:16px">
+                        <div class="card-header">
+                            <div class="card-title">🎥 Quick Actions</div>
+                        </div>
+                        <div style="text-align:center;padding:16px">
+                            <button class="btn primary" style="width:100%;padding:14px;font-size:15px;font-weight:600" onclick="enterFocusMode()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                                Start Lecture
+                            </button>
+                            <div style="font-size:11px;color:var(--text-muted);margin-top:8px">Start a live lecture session now</div>
+                        </div>
+                    </div>
+                    <div class="card animate-in">
+                        <div class="card-header">
+                            <div class="card-title">❓ Student Queries</div>
+                        </div>
+                        <div style="text-align:center;padding:12px">
+                            <div style="font-size:28px;font-weight:800;color:var(--accent-orange);margin-bottom:4px">3</div>
+                            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Queries to Resolve</div>
+                            <button class="btn" onclick="navigateTo('teacher','resolveQueries')" style="width:100%">
+                                View & Resolve Queries →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- ===== TEACHER FORMS ===== -->
@@ -3175,7 +3784,7 @@
 
         <div class="page-view" id="page-createLecture">
             <div class="page-header"><div class="page-title">Create Lecture</div></div>
-            <div class="card" style="max-width:600px">
+            <div class="card" style="max-width:700px">
                 <div class="form-group"><label class="form-label">Lecture Title</label><input type="text" class="form-input" placeholder="e.g., Introduction to Neural Networks"></div>
                 <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>Machine Learning</option><option>Data Structures</option><option>Operating Systems</option></select></div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -3193,7 +3802,7 @@
 
         <div class="page-view" id="page-uploadAssignment">
             <div class="page-header"><div class="page-title">Upload Assignment</div></div>
-            <div class="card" style="max-width:600px">
+            <div class="card" style="max-width:700px">
                 <div class="form-group"><label class="form-label">Assignment Title</label><input type="text" class="form-input" placeholder="e.g., Lab Assignment #4"></div>
                 <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>Machine Learning</option><option>Data Structures</option><option>Operating Systems</option></select></div>
                 <div class="form-group"><label class="form-label">Due Date</label><input type="datetime-local" class="form-input"></div>
@@ -3561,7 +4170,7 @@
             subjectHealth: {
                 title: '📊 Subject Health',
                 body: `
-                    <div class="subject-card" onclick="this.classList.toggle('expanded')">
+                    <div class="subject-card subject-3d" onclick="this.classList.toggle('expanded')">
                         <div class="subject-header">
                             <div class="subject-name"><div class="subject-dot" style="background:var(--accent-primary)"></div>Data Structures</div>
                             <div class="subject-pct" style="color:var(--accent-primary)">92%</div>
@@ -3574,7 +4183,7 @@
                             <div class="detail-row"><span>Attendance</span><span>92%</span></div>
                         </div>
                     </div>
-                    <div class="subject-card" onclick="this.classList.toggle('expanded')">
+                    <div class="subject-card subject-3d" onclick="this.classList.toggle('expanded')">
                         <div class="subject-header">
                             <div class="subject-name"><div class="subject-dot" style="background:var(--accent-cyan)"></div>Operating Systems</div>
                             <div class="subject-pct" style="color:var(--accent-cyan)">78%</div>
@@ -3587,7 +4196,7 @@
                             <div class="detail-row"><span>Attendance</span><span>78%</span></div>
                         </div>
                     </div>
-                    <div class="subject-card" onclick="this.classList.toggle('expanded')">
+                    <div class="subject-card subject-3d" onclick="this.classList.toggle('expanded')">
                         <div class="subject-header">
                             <div class="subject-name"><div class="subject-dot" style="background:var(--accent-green)"></div>Machine Learning</div>
                             <div class="subject-pct" style="color:var(--accent-green)">65%</div>
@@ -3959,6 +4568,299 @@
     function exitFocusMode() {
         document.getElementById('focusMode').classList.remove('active');
     }
+
+
+    // ===== NAVIGATION HISTORY (BACK BUTTON) =====
+    let navHistory = [];
+
+    const originalNavigateTo = navigateTo;
+    navigateTo = function(mode, page) {
+        // Push current state to history
+        if (currentPage[currentMode]) {
+            navHistory.push({ mode: currentMode, page: currentPage[currentMode] });
+        }
+        originalNavigateTo(mode, page);
+        updateBackBtn();
+    };
+
+    function goBack() {
+        if (navHistory.length === 0) return;
+        const prev = navHistory.pop();
+        // Switch mode if needed
+        if (prev.mode !== currentMode) {
+            currentMode = prev.mode;
+            document.querySelectorAll('.mode-toggle-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === prev.mode);
+            });
+            document.getElementById('resourceBar-student').classList.toggle('hidden', prev.mode !== 'student');
+            document.getElementById('resourceBar-class').classList.toggle('hidden', prev.mode !== 'class');
+            if (prev.mode === 'teacher') {
+                document.getElementById('resourceBar-student').classList.add('hidden');
+                document.getElementById('resourceBar-class').classList.add('hidden');
+            }
+            document.getElementById('navBar-student').style.display = prev.mode === 'student' ? 'flex' : 'none';
+            document.getElementById('navBar-class').style.display = prev.mode === 'class' ? 'flex' : 'none';
+            document.getElementById('navBar-teacher').style.display = prev.mode === 'teacher' ? 'flex' : 'none';
+        }
+        currentPage[prev.mode] = prev.page;
+        document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('page-' + prev.page);
+        if (target) target.classList.add('active');
+        // Update nav active state
+        const navBar = document.getElementById('navBar-' + prev.mode);
+        if (navBar) {
+            navBar.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            navBar.querySelectorAll('.nav-item').forEach(item => {
+                const oc = item.getAttribute('onclick');
+                if (oc && oc.includes("'" + prev.page + "'")) item.classList.add('active');
+            });
+        }
+        updateBackBtn();
+    }
+
+    function updateBackBtn() {
+        const btn = document.getElementById('backBtn');
+        if (btn) btn.disabled = navHistory.length === 0;
+    }
+
+    // ===== MONTHLY MOOD CALENDAR =====
+    let moodData = {};
+    let journalData = {};
+    let selectedCalMood = null;
+
+    function setCalMood(emoji) {
+        selectedCalMood = emoji;
+        document.getElementById('selectedMoodLabel').textContent = 'Selected: ' + emoji + ' — now click a date';
+        document.getElementById('selectedMoodLabel').style.color = 'var(--accent-primary)';
+    }
+
+    function buildMoodCalendar() {
+        const grid = document.getElementById('moodCalendarGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        // January 2025: starts Wednesday (3 empty), 31 days
+        const startDay = 2; // 0=Mon, Wed=2
+        const totalDays = 31;
+        const today = 15;
+        for (let i = 0; i < startDay; i++) {
+            const empty = document.createElement('div');
+            empty.className = 'mood-cal-day empty-mood';
+            grid.appendChild(empty);
+        }
+        for (let d = 1; d <= totalDays; d++) {
+            const day = document.createElement('div');
+            day.className = 'mood-cal-day';
+            if (d === today) day.classList.add('today-mood');
+            if (moodData[d]) {
+                day.textContent = moodData[d];
+                day.classList.add('has-mood');
+            } else {
+                day.textContent = d;
+            }
+            day.onclick = () => onMoodCalDayClick(d);
+            grid.appendChild(day);
+        }
+    }
+
+    function onMoodCalDayClick(day) {
+        if (selectedCalMood) {
+            moodData[day] = selectedCalMood;
+            buildMoodCalendar();
+        }
+        openJournal(day);
+    }
+
+    function openJournal(day) {
+        document.getElementById('journalDate').textContent = 'Jan ' + day;
+        document.getElementById('journalTextarea').value = journalData[day] || '';
+        const mood = moodData[day];
+        document.getElementById('journalMoodDisplay').textContent = mood ? 'Mood: ' + mood : 'No mood set for this day';
+        document.getElementById('journalOverlay').classList.add('show');
+        document.getElementById('journalOverlay')._day = day;
+    }
+
+    function closeJournal() {
+        document.getElementById('journalOverlay').classList.remove('show');
+    }
+
+    function saveJournal() {
+        const day = document.getElementById('journalOverlay')._day;
+        journalData[day] = document.getElementById('journalTextarea').value;
+        closeJournal();
+        buildMoodCalendar();
+    }
+
+    // Pre-fill some mood data
+    moodData[3] = '😄'; moodData[7] = '🙂'; moodData[10] = '😐'; moodData[12] = '😄'; moodData[14] = '😔';
+
+    // ===== EARN FOCUS (replaces Forest Focus) =====
+    let earnedCoins = 47;
+
+    // ===== KNOWLEDGE GRAPH INTERACTIVE =====
+    function initKnowledgeGraph(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width = canvas.parentElement.offsetWidth;
+        const H = canvas.height = canvas.parentElement.offsetHeight;
+
+        const nodes = [
+            { x: W*0.2, y: H*0.3, label: 'Binary Trees', color: '#8b5cf6', r: 24, vx: 0, vy: 0 },
+            { x: W*0.5, y: H*0.2, label: 'Sorting', color: '#22d3ee', r: 20, vx: 0, vy: 0 },
+            { x: W*0.8, y: H*0.3, label: 'Neural Nets', color: '#34d399', r: 22, vx: 0, vy: 0 },
+            { x: W*0.3, y: H*0.6, label: 'TCP/IP', color: '#fb923c', r: 18, vx: 0, vy: 0 },
+            { x: W*0.6, y: H*0.5, label: 'Threads', color: '#f472b6', r: 20, vx: 0, vy: 0 },
+            { x: W*0.7, y: H*0.7, label: 'Patterns', color: '#fbbf24', r: 18, vx: 0, vy: 0 },
+            { x: W*0.15, y: H*0.7, label: 'Graphs', color: '#8b5cf6', r: 22, vx: 0, vy: 0 },
+            { x: W*0.45, y: H*0.75, label: 'Hashing', color: '#22d3ee', r: 18, vx: 0, vy: 0 },
+            { x: W*0.85, y: H*0.6, label: 'CNN', color: '#34d399', r: 20, vx: 0, vy: 0 },
+        ];
+        const links = [
+            [0,1],[0,6],[1,4],[2,8],[2,4],[3,4],[3,7],[5,4],[6,7],[0,7],[1,7],[2,5],[8,5]
+        ];
+
+        let hoveredNode = null;
+        let selectedNode = null;
+        const infoPanel = canvas.parentElement.querySelector('.kg-info-panel');
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            // Draw links
+            links.forEach(([a,b]) => {
+                const isHighlighted = hoveredNode !== null && (a === hoveredNode || b === hoveredNode);
+                ctx.beginPath();
+                ctx.moveTo(nodes[a].x, nodes[a].y);
+                ctx.lineTo(nodes[b].x, nodes[b].y);
+                ctx.strokeStyle = isHighlighted ? nodes[hoveredNode].color : 'rgba(139,92,246,0.15)';
+                ctx.lineWidth = isHighlighted ? 2 : 1;
+                ctx.stroke();
+            });
+            // Draw nodes
+            nodes.forEach((n, i) => {
+                const isHovered = i === hoveredNode;
+                const isConnected = hoveredNode !== null && links.some(([a,b]) => (a===hoveredNode&&b===i)||(b===hoveredNode&&a===i));
+                const dimmed = hoveredNode !== null && !isHovered && !isConnected;
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r + (isHovered ? 4 : 0), 0, Math.PI*2);
+                ctx.fillStyle = dimmed ? 'rgba(100,100,100,0.2)' : n.color + (isHovered ? '' : '44');
+                ctx.fill();
+                if (isHovered) {
+                    ctx.strokeStyle = n.color;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                ctx.fillStyle = dimmed ? 'rgba(150,150,150,0.4)' : (isHovered ? '#fff' : 'rgba(228,228,231,0.9)');
+                ctx.font = (isHovered ? 'bold ' : '') + '10px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(n.label, n.x, n.y + n.r + 14);
+            });
+
+            // Gentle floating
+            nodes.forEach(n => {
+                n.x += Math.sin(Date.now()/2000 + n.y) * 0.15;
+                n.y += Math.cos(Date.now()/2500 + n.x) * 0.1;
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mx = (e.clientX - rect.left) * (W / rect.width);
+            const my = (e.clientY - rect.top) * (H / rect.height);
+            hoveredNode = null;
+            nodes.forEach((n, i) => {
+                const dx = mx - n.x, dy = my - n.y;
+                if (Math.sqrt(dx*dx+dy*dy) < n.r + 5) hoveredNode = i;
+            });
+            canvas.style.cursor = hoveredNode !== null ? 'pointer' : 'default';
+        });
+
+        canvas.addEventListener('click', () => {
+            if (hoveredNode !== null) {
+                const n = nodes[hoveredNode];
+                const connected = links.filter(([a,b]) => a===hoveredNode||b===hoveredNode)
+                    .map(([a,b]) => nodes[a===hoveredNode?b:a].label);
+                if (infoPanel) {
+                    infoPanel.innerHTML = '<strong style="color:'+n.color+'">'+n.label+'</strong> — Connected: '+connected.join(', ');
+                    infoPanel.classList.add('show');
+                }
+            } else if (infoPanel) {
+                infoPanel.classList.remove('show');
+            }
+        });
+
+        draw();
+    }
+
+    // ===== PDF PREVIEW =====
+    function openPdfPreview(name) {
+        document.getElementById('pdfPreviewTitle').textContent = name;
+        document.getElementById('pdfPreviewName').textContent = name;
+        document.getElementById('pdfPreviewOverlay').classList.add('show');
+    }
+    function closePdfPreview() {
+        document.getElementById('pdfPreviewOverlay').classList.remove('show');
+    }
+
+    // ===== RESOURCE SHELF FILTERS =====
+    function filterResources(query) {
+        document.querySelectorAll('.resource-shelf-card').forEach(card => {
+            const name = card.querySelector('.resource-shelf-name').textContent.toLowerCase();
+            card.style.display = name.includes(query.toLowerCase()) ? '' : 'none';
+        });
+    }
+    function filterByType(el, type) {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        document.querySelectorAll('.resource-shelf-card').forEach(card => {
+            if (type === 'all') { card.style.display = ''; return; }
+            card.style.display = card.dataset.type === type ? '' : 'none';
+        });
+    }
+
+    // ===== UPDATED POPUP CONTENT (Earn Focus + Knowledge Graph) =====
+    const originalGetPopupContent = getPopupContent;
+    getPopupContent = function(type) {
+        if (type === 'earnFocus') {
+            const coinCount = earnedCoins;
+            let coinsHtml = '';
+            for (let i = 0; i < Math.min(coinCount, 20); i++) {
+                coinsHtml += '<div class="coin-icon">$</div>';
+            }
+            const fillHeight = Math.min(95, (coinCount / 100) * 100);
+            const config = {
+                title: '🪙 Earn Focus',
+                body: '<div class="earn-focus-container"><div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Complete focus sessions to earn coins</div><div class="glass-jar"><div class="glass-jar-fill" style="height:'+fillHeight+'%">'+coinsHtml+'</div></div><div class="earn-stats"><div class="earn-stat"><div class="earn-stat-val">'+coinCount+'</div><div class="earn-stat-label">Total Coins</div></div><div class="earn-stat"><div class="earn-stat-val">19.5h</div><div class="earn-stat-label">Total Focus</div></div><div class="earn-stat"><div class="earn-stat-val">4</div><div class="earn-stat-label">Today</div></div></div><button class="pomo-btn primary" style="margin-top:14px" onclick="earnCoin()">🪙 Start Focus Session</button></div>'
+            };
+            return '<div class="popup-header" onmousedown="startDrag(event, this.parentElement)"><div class="popup-title">'+config.title+'</div><div class="popup-controls"><div class="popup-ctrl minimize" onclick="minimizePopup(\''+type+'\')"></div><div class="popup-ctrl maximize" onclick="maximizePopup(\''+type+'\')"></div><div class="popup-ctrl close" onclick="closePopup(\''+type+'\')"></div></div></div><div class="popup-body">'+config.body+'</div><div class="popup-resize" onmousedown="startResize(event, this.parentElement)"></div>';
+        }
+        if (type === 'knowledge') {
+            return '<div class="popup-header" onmousedown="startDrag(event, this.parentElement)"><div class="popup-title">🌐 Knowledge Graph</div><div class="popup-controls"><div class="popup-ctrl minimize" onclick="minimizePopup(\'knowledge\')"></div><div class="popup-ctrl maximize" onclick="maximizePopup(\'knowledge\')"></div><div class="popup-ctrl close" onclick="closePopup(\'knowledge\')"></div></div></div><div class="popup-body" style="padding:0"><div class="kg-canvas-container"><canvas id="kgCanvas"></canvas><div class="kg-info-panel">Click a node to explore</div></div></div><div class="popup-resize" onmousedown="startResize(event, this.parentElement)"></div>';
+        }
+        return originalGetPopupContent(type);
+    };
+
+    function earnCoin() {
+        earnedCoins++;
+        alert('🪙 Focus session started! Coin earned. Total: ' + earnedCoins);
+        closePopup('earnFocus');
+        openPopup('earnFocus');
+    }
+
+    // Hook into openPopup to init knowledge graph after DOM insert
+    const originalOpenPopup = openPopup;
+    openPopup = function(type) {
+        originalOpenPopup(type);
+        if (type === 'knowledge') {
+            setTimeout(() => initKnowledgeGraph('kgCanvas'), 100);
+        }
+    };
+
+    // ===== INIT MOOD CALENDAR =====
+    buildMoodCalendar();
 
     // ===== INIT =====
     switchMode('student');

@@ -1,0 +1,3968 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniHub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --transition-speed: 0.3s;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a2e;
+            --bg-card: rgba(26, 26, 46, 0.8);
+            --bg-glass: rgba(26, 26, 46, 0.6);
+            --bg-hover: rgba(139, 92, 246, 0.1);
+            --border-color: rgba(139, 92, 246, 0.2);
+            --border-glow: rgba(139, 92, 246, 0.4);
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #6366f1;
+            --accent-tertiary: #a78bfa;
+            --accent-cyan: #22d3ee;
+            --accent-green: #34d399;
+            --accent-orange: #fb923c;
+            --accent-pink: #f472b6;
+            --accent-red: #ef4444;
+            --accent-yellow: #fbbf24;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glass-bg: rgba(26, 26, 46, 0.7);
+            --glass-border: rgba(139, 92, 246, 0.15);
+            --scrollbar-track: #12121a;
+            --scrollbar-thumb: #2d2d44;
+            --nav-bg: rgba(18, 18, 26, 0.95);
+            --resource-bg: rgba(10, 10, 15, 0.98);
+            --popup-bg: rgba(20, 20, 35, 0.92);
+            --input-bg: rgba(26, 26, 46, 0.5);
+            --badge-bg: rgba(139, 92, 246, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8f9fc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f3f9;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-glass: rgba(255, 255, 255, 0.7);
+            --bg-hover: rgba(99, 102, 241, 0.08);
+            --border-color: rgba(99, 102, 241, 0.15);
+            --border-glow: rgba(99, 102, 241, 0.3);
+            --text-primary: #1e1b4b;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --accent-primary: #6366f1;
+            --accent-secondary: #4f46e5;
+            --accent-tertiary: #818cf8;
+            --accent-cyan: #0891b2;
+            --accent-green: #059669;
+            --accent-orange: #ea580c;
+            --accent-pink: #db2777;
+            --accent-red: #dc2626;
+            --accent-yellow: #d97706;
+            --shadow-color: rgba(99, 102, 241, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(99, 102, 241, 0.12);
+            --scrollbar-track: #f1f3f9;
+            --scrollbar-thumb: #c7d2fe;
+            --nav-bg: rgba(255, 255, 255, 0.97);
+            --resource-bg: rgba(248, 249, 252, 0.98);
+            --popup-bg: rgba(255, 255, 255, 0.95);
+            --input-bg: rgba(241, 243, 249, 0.8);
+            --badge-bg: rgba(99, 102, 241, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+            transition: background var(--transition-speed), color var(--transition-speed);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 3px;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 1000;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--accent-primary);
+        }
+
+        .logo svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .logo-text span {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 12px;
+        }
+
+        .command-bar-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: 20px;
+        }
+
+        .command-bar-trigger:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-secondary);
+        }
+
+        .command-bar-trigger kbd {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            padding: 2px 6px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mode-toggle-group {
+            display: flex;
+            align-items: center;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2px;
+            gap: 2px;
+        }
+
+        .mode-toggle-btn {
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 500;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .mode-toggle-btn.active {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+        }
+
+        .mode-toggle-btn:hover:not(.active) {
+            color: var(--text-primary);
+            background: var(--bg-hover);
+        }
+
+        .icon-btn {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: var(--bg-hover);
+        }
+
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            border: 2px solid var(--bg-secondary);
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .theme-switch {
+            width: 40px;
+            height: 22px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 11px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-switch::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        [data-theme="light"] .theme-switch::after {
+            left: 20px;
+            background: var(--accent-yellow);
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .app-layout {
+            display: flex;
+            height: 100vh;
+            padding-top: 48px;
+        }
+
+        /* ===== RESOURCE BAR ===== */
+        .resource-bar {
+            width: 52px;
+            background: var(--resource-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+            gap: 4px;
+            z-index: 100;
+            transition: all var(--transition-speed);
+        }
+
+        .resource-bar.hidden {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+            border-right: none;
+        }
+
+        .resource-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: var(--text-muted);
+            cursor: grab;
+            transition: all 0.2s;
+            position: relative;
+            border: 1px solid transparent;
+        }
+
+        .resource-item:hover {
+            color: var(--accent-primary);
+            background: var(--bg-hover);
+            border-color: var(--border-color);
+        }
+
+        .resource-item:active {
+            cursor: grabbing;
+        }
+
+        .resource-item svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .resource-item .tooltip {
+            position: absolute;
+            left: 50px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            border: 1px solid var(--border-color);
+            z-index: 1001;
+        }
+
+        .resource-item:hover .tooltip {
+            opacity: 1;
+        }
+
+        .resource-divider {
+            width: 24px;
+            height: 1px;
+            background: var(--border-color);
+            margin: 6px 0;
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .nav-bar {
+            width: 220px;
+            background: var(--nav-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 99;
+            transition: all var(--transition-speed);
+            overflow-y: auto;
+        }
+
+        .nav-section-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            padding: 16px 16px 6px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+            font-weight: 450;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--bg-hover);
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+        }
+
+        .nav-item svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .nav-item .nav-badge {
+            margin-left: auto;
+            font-size: 10px;
+            padding: 1px 6px;
+            background: var(--badge-bg);
+            color: var(--accent-primary);
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .nav-avatar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .avatar-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+            position: relative;
+        }
+
+        .avatar-circle .life-bar {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .avatar-circle .life-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            transition: width 0.5s;
+        }
+
+        .avatar-info {
+            flex: 1;
+        }
+
+        .avatar-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .avatar-role {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .nav-bottom {
+            margin-top: auto;
+            padding: 12px 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* ===== MAIN DASHBOARD ===== */
+        .main-dashboard {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 24px;
+            position: relative;
+            background: var(--bg-primary);
+        }
+
+        /* ===== GREETING ===== */
+        .greeting-section {
+            margin-bottom: 24px;
+        }
+
+        .greeting-text {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .greeting-text .highlight {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .greeting-sub {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .greeting-date {
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        /* ===== DASHBOARD GRID ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+
+        .dashboard-full {
+            grid-column: 1 / -1;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent-primary);
+        }
+
+        .card-action {
+            font-size: 12px;
+            color: var(--accent-primary);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .card-action:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== PROGRESS BARS ===== */
+        .progress-item {
+            margin-bottom: 14px;
+        }
+
+        .progress-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+
+        .progress-label span:first-child {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-label span:last-child {
+            color: var(--text-muted);
+        }
+
+        .progress-track {
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* ===== STAT CARDS ===== */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ===== RECENT ACTIVITY ===== */
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .activity-icon svg {
+            width: 16px;
+            height: 16px;
+            color: white;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .activity-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .activity-time {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ===== ACHIEVEMENT BADGES ===== */
+        .achievement-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .achievement-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .achievement-badge:hover {
+            transform: scale(1.1);
+            border-color: var(--accent-primary);
+        }
+
+        .achievement-badge.locked {
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        /* ===== FLOATING POPUP PANELS ===== */
+        .popup-panel {
+            position: absolute;
+            min-width: 300px;
+            min-height: 200px;
+            background: var(--popup-bg);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 8px 40px var(--shadow-color), 0 0 0 1px var(--border-color);
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .popup-panel.focused {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 40px var(--shadow-color), 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+
+        .popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            cursor: grab;
+            user-select: none;
+        }
+
+        .popup-header:active {
+            cursor: grabbing;
+        }
+
+        .popup-title {
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .popup-title svg {
+            width: 14px;
+            height: 14px;
+            color: var(--accent-primary);
+        }
+
+        .popup-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .popup-ctrl {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .popup-ctrl.close { background: #ef4444; }
+        .popup-ctrl.minimize { background: #fbbf24; }
+        .popup-ctrl.maximize { background: #34d399; }
+
+        .popup-ctrl:hover {
+            transform: scale(1.2);
+        }
+
+        .popup-body {
+            flex: 1;
+            padding: 14px;
+            overflow-y: auto;
+        }
+
+        .popup-resize {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            cursor: nwse-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-resize::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid var(--text-muted);
+            border-bottom: 2px solid var(--text-muted);
+            opacity: 0.4;
+        }
+
+        /* ===== CALENDAR WIDGET ===== */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .cal-header {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 4px 0;
+        }
+
+        .cal-day {
+            text-align: center;
+            font-size: 12px;
+            padding: 6px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .cal-day:hover { background: var(--bg-hover); }
+        .cal-day.today {
+            background: var(--accent-primary);
+            color: white;
+            font-weight: 600;
+        }
+        .cal-day.has-event {
+            position: relative;
+        }
+        .cal-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+        }
+        .cal-day.empty { color: var(--text-muted); opacity: 0.3; }
+
+        /* ===== POMODORO ===== */
+        .pomodoro-circle {
+            width: 140px;
+            height: 140px;
+            margin: 10px auto;
+            border-radius: 50%;
+            border: 4px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .pomodoro-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .pomodoro-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .pomodoro-ring {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: calc(100% + 8px);
+            height: calc(100% + 8px);
+        }
+
+        .pomodoro-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 14px;
+        }
+
+        .pomo-btn {
+            padding: 6px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pomo-btn.primary {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        .pomo-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* ===== AI ASSISTANT ===== */
+        .ai-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .ai-msg {
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+            max-width: 90%;
+        }
+
+        .ai-msg.bot {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            align-self: flex-start;
+        }
+
+        .ai-msg.user {
+            background: var(--accent-primary);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .ai-input-area {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+        }
+
+        .ai-input:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .ai-send {
+            padding: 8px 14px;
+            background: var(--accent-primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* ===== FOREST APP ===== */
+        .forest-display {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .tree-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .tree-cell {
+            font-size: 28px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .tree-cell.empty {
+            opacity: 0.2;
+        }
+
+        .forest-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 12px;
+        }
+
+        .forest-stat {
+            text-align: center;
+        }
+
+        .forest-stat-val {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .forest-stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ===== KNOWLEDGE GRAPH ===== */
+        .kg-visual {
+            text-align: center;
+            padding: 16px;
+        }
+
+        .kg-node-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .kg-node {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid;
+        }
+
+        .kg-node:hover { transform: scale(1.05); }
+
+        /* ===== COMMAND PALETTE ===== */
+        .command-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 20vh;
+        }
+
+        .command-overlay.show {
+            display: flex;
+        }
+
+        .command-palette {
+            width: 560px;
+            max-height: 400px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .command-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 16px;
+            outline: none;
+        }
+
+        .command-results {
+            max-height: 320px;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .command-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .command-item:hover, .command-item.selected {
+            background: var(--bg-hover);
+        }
+
+        .command-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--text-muted);
+        }
+
+        .command-item-text {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        .command-item-shortcut {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ===== TEACHER MODE ===== */
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .teacher-action-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .teacher-action-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-color);
+        }
+
+        .teacher-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .teacher-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .teacher-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .teacher-card-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ===== INNER PAGES ===== */
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-primary);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .btn.primary {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: var(--accent-secondary);
+        }
+
+        /* ===== NOTES (Drive-like) ===== */
+        .drive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .drive-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .drive-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .drive-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .drive-name {
+            font-size: 12px;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .drive-meta {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ===== CHAT ===== */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 180px);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .chat-msg {
+            display: flex;
+            gap: 10px;
+            max-width: 75%;
+        }
+
+        .chat-msg.sent {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .chat-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .chat-bubble {
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        .chat-msg.sent .chat-bubble {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        .chat-input-bar {
+            display: flex;
+            gap: 8px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent-primary);
+        }
+
+        /* ===== MENTAL HEALTH ===== */
+        .mood-grid {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        .mood-option {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            transition: all 0.2s;
+            background: var(--bg-card);
+        }
+
+        .mood-option:hover {
+            transform: scale(1.1);
+            border-color: var(--accent-primary);
+        }
+
+        .mood-option.selected {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .weekly-chart {
+            display: flex;
+            align-items: end;
+            gap: 8px;
+            justify-content: center;
+            height: 120px;
+            margin: 20px 0;
+        }
+
+        .chart-bar {
+            width: 30px;
+            border-radius: 6px 6px 0 0;
+            transition: height 0.5s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .chart-bar-label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ===== SUBJECT HEALTH ===== */
+        .subject-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .subject-card:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .subject-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .subject-name {
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subject-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .subject-pct {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .subject-details {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .subject-card.expanded .subject-details {
+            display: block;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            padding: 4px 0;
+            color: var(--text-secondary);
+        }
+
+        /* ===== TIMETABLE ===== */
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .timetable th {
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .timetable td {
+            padding: 10px 12px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .timetable tr:hover td {
+            background: var(--bg-hover);
+        }
+
+        .attendance-badge {
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* ===== LIVE LECTURE FOCUS MODE ===== */
+        .focus-mode-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .focus-mode-overlay.active {
+            display: flex;
+        }
+
+        .focus-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .focus-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .lecture-screen {
+            flex: 2;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .lecture-placeholder {
+            text-align: center;
+        }
+
+        .lecture-placeholder svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .focus-notes {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .focus-notes textarea {
+            flex: 1;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            padding: 14px;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .focus-notes textarea:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-red);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* ===== IFRAME CONTAINER ===== */
+        .iframe-container {
+            width: 100%;
+            height: calc(100vh - 160px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .iframe-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            color: var(--text-muted);
+            background: var(--bg-card);
+        }
+
+        .iframe-placeholder svg {
+            width: 48px;
+            height: 48px;
+            opacity: 0.3;
+        }
+
+        /* ===== NOTIFICATION PANEL ===== */
+        .notification-panel {
+            position: fixed;
+            top: 48px;
+            right: 0;
+            width: 340px;
+            max-height: 400px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0 0 0 16px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            z-index: 1500;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .notification-panel.show {
+            display: block;
+        }
+
+        .notif-header {
+            padding: 14px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notif-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .notif-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .notif-item-title {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .notif-item-time {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .notif-unread {
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        /* Teacher form styles */
+        .teacher-form {
+            display: none;
+            max-width: 600px;
+        }
+
+        .teacher-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        /* Quick actions row */
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-chip {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick-action-chip:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: var(--bg-hover);
+        }
+
+        .quick-action-chip svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animate-in {
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        /* Upcoming lectures */
+        .lecture-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lecture-card:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .lecture-time-block {
+            text-align: center;
+            min-width: 50px;
+        }
+
+        .lecture-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .lecture-period {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .lecture-info {
+            flex: 1;
+        }
+
+        .lecture-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .lecture-prof {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .lecture-status {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Subject Prioritization */
+        .priority-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .priority-rank {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .priority-info {
+            flex: 1;
+        }
+
+        .priority-subject {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .priority-reason {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Group Projects */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .project-name {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .project-members {
+            display: flex;
+            gap: -6px;
+        }
+
+        .project-member {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            border: 2px solid var(--bg-primary);
+            margin-left: -6px;
+        }
+
+        .project-member:first-child {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-bar-left">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/><polyline points="2 15.5 12 8.5 22 15.5"/><line x1="12" y1="2" x2="12" y2="8.5"/></svg>
+            <div class="logo-text">Nexus-Uni <span>Scholar's Command Center</span></div>
+        </div>
+        <div class="command-bar-trigger" onclick="toggleCommandPalette()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Search or command...
+            <kbd>⌘K</kbd>
+        </div>
+    </div>
+    <div class="top-bar-right">
+        <div class="mode-toggle-group" id="modeToggleGroup">
+            <button class="mode-toggle-btn active" data-mode="student" onclick="switchMode('student')">Student</button>
+            <button class="mode-toggle-btn" data-mode="class" onclick="switchMode('class')">Class</button>
+            <button class="mode-toggle-btn" data-mode="teacher" onclick="switchMode('teacher')">Teacher</button>
+        </div>
+
+        <button class="icon-btn" onclick="toggleNotifications()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="notification-badge"></span>
+        </button>
+
+        <div class="theme-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <div class="theme-switch" onclick="toggleTheme()"></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+    </div>
+</div>
+
+<!-- NOTIFICATION PANEL -->
+<div class="notification-panel" id="notificationPanel">
+    <div class="notif-header">
+        Notifications
+        <span class="card-action" onclick="clearNotifications()">Mark all read</span>
+    </div>
+    <div class="notif-item notif-unread">
+        <div class="notif-item-title">📝 Assignment due: Data Structures Lab 3</div>
+        <div class="notif-item-time">2 hours ago</div>
+    </div>
+    <div class="notif-item notif-unread">
+        <div class="notif-item-title">🎓 Prof. Williams left feedback on your essay</div>
+        <div class="notif-item-time">5 hours ago</div>
+    </div>
+    <div class="notif-item">
+        <div class="notif-item-title">🌲 Focus session completed: 25 min</div>
+        <div class="notif-item-time">Yesterday</div>
+    </div>
+    <div class="notif-item">
+        <div class="notif-item-title">📊 Weekly progress report ready</div>
+        <div class="notif-item-time">2 days ago</div>
+    </div>
+    <div class="notif-item">
+        <div class="notif-item-title">👥 New message in ML Project group</div>
+        <div class="notif-item-time">3 days ago</div>
+    </div>
+</div>
+
+<!-- COMMAND PALETTE -->
+<div class="command-overlay" id="commandOverlay">
+    <div class="command-palette">
+        <input type="text" class="command-input" placeholder="Type a command or search..." id="commandInput" oninput="filterCommands(this.value)">
+        <div class="command-results" id="commandResults">
+            <div class="command-item" onclick="executeCommand('home')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <span class="command-item-text">Go to Home</span>
+                <span class="command-item-shortcut">⌘H</span>
+            </div>
+            <div class="command-item" onclick="executeCommand('notes')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="command-item-text">Open Notes</span>
+                <span class="command-item-shortcut">⌘N</span>
+            </div>
+            <div class="command-item" onclick="executeCommand('calendar')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span class="command-item-text">Open Calendar</span>
+                <span class="command-item-shortcut">⌘L</span>
+            </div>
+            <div class="command-item" onclick="executeCommand('pomodoro')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span class="command-item-text">Start Pomodoro Timer</span>
+            </div>
+            <div class="command-item" onclick="executeCommand('ai')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg>
+                <span class="command-item-text">Open AI Assistant</span>
+                <span class="command-item-shortcut">⌘I</span>
+            </div>
+            <div class="command-item" onclick="executeCommand('dark')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <span class="command-item-text">Toggle Dark/Light Mode</span>
+                <span class="command-item-shortcut">⌘D</span>
+            </div>
+            <div class="command-item" onclick="executeCommand('class')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <span class="command-item-text">Switch to Class Mode</span>
+            </div>
+            <div class="command-item" onclick="executeCommand('mental')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span class="command-item-text">Mental Health Check-in</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOCUS MODE (Live Lecture) -->
+<div class="focus-mode-overlay" id="focusMode">
+    <div class="focus-top-bar">
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            LIVE — Data Structures & Algorithms
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:13px;color:var(--text-muted)">Prof. Dr. Sarah Chen</span>
+            <button class="btn" onclick="exitFocusMode()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Exit Focus Mode
+            </button>
+        </div>
+    </div>
+    <div class="focus-content">
+        <div class="lecture-screen">
+            <div class="lecture-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <div style="font-size:16px;opacity:0.7">Lecture Stream Active</div>
+                <div style="font-size:12px;opacity:0.4;margin-top:8px">Binary Trees & Traversal Algorithms</div>
+            </div>
+        </div>
+        <div class="focus-notes">
+            <div style="font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Lecture Notes
+            </div>
+            <textarea placeholder="Start taking notes...&#10;&#10;• Binary tree properties&#10;• In-order traversal: Left → Root → Right&#10;• Pre-order traversal: Root → Left → Right&#10;• Time complexity: O(n)"></textarea>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MAIN APP LAYOUT ===== -->
+<div class="app-layout">
+
+    <!-- RESOURCE BAR - STUDENT MODE -->
+    <div class="resource-bar" id="resourceBar-student">
+        <div class="resource-item" draggable="true" onclick="openPopup('calendar')" ondragstart="dragStart(event, 'calendar')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="tooltip">Calendar</span>
+        </div>
+        <div class="resource-item" draggable="true" onclick="openPopup('knowledge')" ondragstart="dragStart(event, 'knowledge')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span class="tooltip">Knowledge Graph</span>
+        </div>
+        <div class="resource-item" draggable="true" onclick="openPopup('ai')" ondragstart="dragStart(event, 'ai')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+            <span class="tooltip">AI Assistant</span>
+        </div>
+        <div class="resource-divider"></div>
+        <div class="resource-item" draggable="true" onclick="openPopup('pomodoro')" ondragstart="dragStart(event, 'pomodoro')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="tooltip">Pomodoro Timer</span>
+        </div>
+        <div class="resource-item" draggable="true" onclick="openPopup('forest')" ondragstart="dragStart(event, 'forest')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 14l3-6h-5l3-6H6l-3 8h5l-3 8h12z"/></svg>
+            <span class="tooltip">Forest Focus</span>
+        </div>
+    </div>
+
+    <!-- RESOURCE BAR - CLASS MODE -->
+    <div class="resource-bar hidden" id="resourceBar-class">
+        <div class="resource-item" draggable="true" onclick="openPopup('profFeedback')" ondragstart="dragStart(event, 'profFeedback')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="tooltip">Professor Feedback</span>
+        </div>
+        <div class="resource-item" draggable="true" onclick="openPopup('calendar')" ondragstart="dragStart(event, 'calendar')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="tooltip">Calendar</span>
+        </div>
+        <div class="resource-item" draggable="true" onclick="openPopup('subjectHealth')" ondragstart="dragStart(event, 'subjectHealth')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span class="tooltip">Subject Health</span>
+        </div>
+    </div>
+
+    <!-- NAVIGATION BAR - STUDENT MODE -->
+    <div class="nav-bar" id="navBar-student">
+        <div class="nav-avatar" onclick="navigateTo('student', 'profile')">
+            <div class="avatar-circle">
+                AK
+                <div class="life-bar"><div class="life-bar-fill" style="width: 78%"></div></div>
+            </div>
+            <div class="avatar-info">
+                <div class="avatar-name">Alex Kumar</div>
+                <div class="avatar-role">CS Sophomore • Lv.12</div>
+            </div>
+        </div>
+        <div class="nav-section-title">Main</div>
+        <div class="nav-item active" onclick="navigateTo('student', 'home')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Home
+        </div>
+        <div class="nav-item" onclick="navigateTo('student', 'profile')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Profile
+        </div>
+        <div class="nav-section-title">Workspace</div>
+        <div class="nav-item" onclick="navigateTo('student', 'notes')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Notes
+            <span class="nav-badge">23</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('student', 'github')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+        </div>
+        <div class="nav-item" onclick="navigateTo('student', 'gmail')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Gmail
+            <span class="nav-badge">5</span>
+        </div>
+        <div class="nav-section-title">Social</div>
+        <div class="nav-item" onclick="navigateTo('student', 'team')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Team Discussion
+            <span class="nav-badge">3</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('student', 'mental')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Mental Health
+        </div>
+    </div>
+
+    <!-- NAVIGATION BAR - CLASS MODE -->
+    <div class="nav-bar" id="navBar-class" style="display:none">
+        <div class="nav-avatar">
+            <div class="avatar-circle">
+                AK
+                <div class="life-bar"><div class="life-bar-fill" style="width: 78%"></div></div>
+            </div>
+            <div class="avatar-info">
+                <div class="avatar-name">Alex Kumar</div>
+                <div class="avatar-role">CS-2024 • Sec A</div>
+            </div>
+        </div>
+        <div class="nav-section-title">Academics</div>
+        <div class="nav-item active" onclick="navigateTo('class', 'classHome')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            Home
+        </div>
+        <div class="nav-item" onclick="navigateTo('class', 'liveLectures')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Live Lectures
+            <span class="nav-badge" style="background:rgba(239,68,68,0.2);color:var(--accent-red)">LIVE</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('class', 'subjectPriority')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Subject Priority
+        </div>
+        <div class="nav-item" onclick="navigateTo('class', 'groupProjects')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Group Projects
+        </div>
+        <div class="nav-item" onclick="navigateTo('class', 'timetable')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Time Table
+        </div>
+    </div>
+
+    <!-- NAVIGATION BAR - TEACHER MODE -->
+    <div class="nav-bar" id="navBar-teacher" style="display:none">
+        <div class="nav-avatar">
+            <div class="avatar-circle" style="background:linear-gradient(135deg, var(--accent-orange), var(--accent-pink))">
+                DW
+            </div>
+            <div class="avatar-info">
+                <div class="avatar-name">Dr. Williams</div>
+                <div class="avatar-role">Professor • CS Dept</div>
+            </div>
+        </div>
+        <div class="nav-section-title">Actions</div>
+        <div class="nav-item active" onclick="navigateTo('teacher', 'teacherHome')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            Dashboard
+        </div>
+        <div class="nav-item" onclick="navigateTo('teacher', 'attendance')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+            Take Attendance
+        </div>
+        <div class="nav-item" onclick="navigateTo('teacher', 'createLecture')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Create Lecture
+        </div>
+        <div class="nav-item" onclick="navigateTo('teacher', 'uploadAssignment')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload Assignment
+        </div>
+        <div class="nav-item" onclick="navigateTo('teacher', 'giveMarks')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            Give Marks
+        </div>
+        <div class="nav-item" onclick="navigateTo('teacher', 'createFeedback')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Create Feedback
+        </div>
+        <div class="nav-item" onclick="navigateTo('teacher', 'resolveQueries')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Resolve Queries
+        </div>
+        <div class="nav-item" onclick="navigateTo('teacher', 'uploadResources')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+            Upload Resources
+        </div>
+    </div>
+
+    <!-- ===== MAIN DASHBOARD AREA ===== -->
+    <div class="main-dashboard" id="mainDashboard" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+
+        <!-- ===== STUDENT HOME ===== -->
+        <div class="page-view active" id="page-home">
+            <div class="greeting-section animate-in">
+                <div class="greeting-text">Good evening, <span class="highlight">Alex</span> 👋</div>
+                <div class="greeting-sub">
+                    <span class="greeting-date">Wednesday, Jan 15, 2025</span> — You have 3 tasks due today. Keep the momentum going!
+                </div>
+            </div>
+
+            <div class="stat-row animate-in">
+                <div class="stat-card" onclick="openPopup('pomodoro')">
+                    <div class="stat-value" style="color:var(--accent-primary)">12.5h</div>
+                    <div class="stat-label">Study Time This Week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:var(--accent-green)">87%</div>
+                    <div class="stat-label">Assignment Completion</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:var(--accent-cyan)">4</div>
+                    <div class="stat-label">Current Streak (Days)</div>
+                </div>
+                <div class="stat-card" onclick="navigateTo('student', 'mental')">
+                    <div class="stat-value" style="color:var(--accent-orange)">78</div>
+                    <div class="stat-label">Wellness Score</div>
+                </div>
+            </div>
+
+            <div class="quick-actions animate-in" style="margin-bottom:20px">
+                <div class="quick-action-chip" onclick="openPopup('pomodoro')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Start Focus Session
+                </div>
+                <div class="quick-action-chip" onclick="navigateTo('student', 'notes')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    New Note
+                </div>
+                <div class="quick-action-chip" onclick="openPopup('ai')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg>
+                    Ask AI
+                </div>
+                <div class="quick-action-chip" onclick="openPopup('calendar')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                    View Calendar
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div>
+                    <div class="card animate-in">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                Recent Activity
+                            </div>
+                            <span class="card-action">View All</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:var(--accent-primary)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Completed DSA Lab Assignment #3</div>
+                                <div class="activity-meta">Data Structures • 95/100</div>
+                            </div>
+                            <div class="activity-time">2h ago</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:var(--accent-green)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77"/></svg>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Pushed 3 commits to ML-Project</div>
+                                <div class="activity-meta">GitHub • feature/neural-net</div>
+                            </div>
+                            <div class="activity-time">5h ago</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:var(--accent-cyan)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Focus session: 50 minutes</div>
+                                <div class="activity-meta">Pomodoro • 2 cycles completed</div>
+                            </div>
+                            <div class="activity-time">Yesterday</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:var(--accent-orange)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Read: "Design Patterns" Ch. 5</div>
+                                <div class="activity-meta">Software Engineering</div>
+                            </div>
+                            <div class="activity-time">Yesterday</div>
+                        </div>
+                    </div>
+
+                    <div class="card animate-in" style="margin-top:16px">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                                Progress Overview
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>Data Structures</span><span>92%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:92%;background:linear-gradient(90deg,#8b5cf6,#a78bfa)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>Operating Systems</span><span>78%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:78%;background:linear-gradient(90deg,#22d3ee,#67e8f9)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>Machine Learning</span><span>65%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:65%;background:linear-gradient(90deg,#34d399,#6ee7b7)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>Software Engineering</span><span>88%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:88%;background:linear-gradient(90deg,#fb923c,#fdba74)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>Computer Networks</span><span>71%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:71%;background:linear-gradient(90deg,#f472b6,#f9a8d4)"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card animate-in">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                                Achievements
+                            </div>
+                        </div>
+                        <div class="achievement-grid">
+                            <div class="achievement-badge" style="background:rgba(139,92,246,0.2);border-color:var(--accent-primary)" title="Code Warrior">⚔️</div>
+                            <div class="achievement-badge" style="background:rgba(34,211,238,0.2);border-color:var(--accent-cyan)" title="Early Bird">🌅</div>
+                            <div class="achievement-badge" style="background:rgba(52,211,153,0.2);border-color:var(--accent-green)" title="Perfect Score">💯</div>
+                            <div class="achievement-badge" style="background:rgba(251,146,60,0.2);border-color:var(--accent-orange)" title="Team Player">🤝</div>
+                            <div class="achievement-badge locked" title="Locked">🔒</div>
+                            <div class="achievement-badge locked" title="Locked">🔒</div>
+                            <div class="achievement-badge locked" title="Locked">🔒</div>
+                            <div class="achievement-badge locked" title="Locked">🔒</div>
+                        </div>
+                    </div>
+
+                    <div class="card animate-in" style="margin-top:16px">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                                Tasks Due Today
+                            </div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:8px">
+                            <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--input-bg);border-radius:8px;cursor:pointer">
+                                <input type="checkbox" style="accent-color:var(--accent-primary);width:16px;height:16px;cursor:pointer" onclick="event.stopPropagation()">
+                                <div>
+                                    <div style="font-size:13px;font-weight:500">OS Lab Report</div>
+                                    <div style="font-size:11px;color:var(--accent-red)">Due in 3 hours</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--input-bg);border-radius:8px;cursor:pointer">
+                                <input type="checkbox" style="accent-color:var(--accent-primary);width:16px;height:16px;cursor:pointer" onclick="event.stopPropagation()">
+                                <div>
+                                    <div style="font-size:13px;font-weight:500">ML Quiz Preparation</div>
+                                    <div style="font-size:11px;color:var(--accent-orange)">Due tonight</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--input-bg);border-radius:8px;cursor:pointer">
+                                <input type="checkbox" checked style="accent-color:var(--accent-primary);width:16px;height:16px;cursor:pointer" onclick="event.stopPropagation()">
+                                <div>
+                                    <div style="font-size:13px;font-weight:500;text-decoration:line-through;opacity:0.5">DSA Assignment #3</div>
+                                    <div style="font-size:11px;color:var(--accent-green)">Completed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card animate-in" style="margin-top:16px">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 14l3-6h-5l3-6H6l-3 8h5l-3 8h12z"/></svg>
+                                Quick Focus
+                            </div>
+                        </div>
+                        <div style="text-align:center;padding:10px">
+                            <div style="font-size:32px;margin-bottom:8px">🌲</div>
+                            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Plant a tree and stay focused</div>
+                            <button class="btn primary" onclick="openPopup('forest')">Start Growing</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== STUDENT PROFILE ===== -->
+        <div class="page-view" id="page-profile">
+            <div class="page-header">
+                <div class="page-title">Profile</div>
+                <button class="btn">Edit Profile</button>
+            </div>
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div style="text-align:center;padding:20px">
+                        <div class="avatar-circle" style="width:80px;height:80px;margin:0 auto 16px;font-size:28px;border-radius:20px">AK</div>
+                        <div style="font-size:20px;font-weight:700;margin-bottom:4px">Alex Kumar</div>
+                        <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Computer Science • Sophomore</div>
+                        <div style="display:flex;justify-content:center;gap:24px;margin-bottom:16px">
+                            <div><div style="font-size:20px;font-weight:700;color:var(--accent-primary)">3.85</div><div style="font-size:11px;color:var(--text-muted)">GPA</div></div>
+                            <div><div style="font-size:20px;font-weight:700;color:var(--accent-green)">Level 12</div><div style="font-size:11px;color:var(--text-muted)">XP Rank</div></div>
+                            <div><div style="font-size:20px;font-weight:700;color:var(--accent-cyan)">156h</div><div style="font-size:11px;color:var(--text-muted)">Total Study</div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>XP Progress</span><span>2,450 / 3,000</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:82%;background:linear-gradient(90deg,var(--accent-primary),var(--accent-cyan))"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-title">🏆 Badges & Streaks</div></div>
+                    <div class="achievement-grid">
+                        <div class="achievement-badge" style="background:rgba(139,92,246,0.2);border-color:var(--accent-primary)">⚔️</div>
+                        <div class="achievement-badge" style="background:rgba(34,211,238,0.2);border-color:var(--accent-cyan)">🌅</div>
+                        <div class="achievement-badge" style="background:rgba(52,211,153,0.2);border-color:var(--accent-green)">💯</div>
+                        <div class="achievement-badge" style="background:rgba(251,146,60,0.2);border-color:var(--accent-orange)">🤝</div>
+                        <div class="achievement-badge" style="background:rgba(244,114,182,0.2);border-color:var(--accent-pink)">📚</div>
+                    </div>
+                    <div style="margin-top:16px;font-size:13px;color:var(--text-secondary)">
+                        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-color)"><span>🔥 Current Streak</span><strong>4 days</strong></div>
+                        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-color)"><span>📈 Best Streak</span><strong>21 days</strong></div>
+                        <div style="display:flex;justify-content:space-between;padding:6px 0"><span>🌲 Trees Planted</span><strong>47</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NOTES (Drive-like) ===== -->
+        <div class="page-view" id="page-notes">
+            <div class="page-header">
+                <div class="page-title">📁 Notes & Documents</div>
+                <div style="display:flex;gap:8px">
+                    <button class="btn" onclick="alert('Upload dialog would open')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        Upload
+                    </button>
+                    <button class="btn primary" onclick="alert('New folder created')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        New Folder
+                    </button>
+                </div>
+            </div>
+            <div class="drive-grid">
+                <div class="drive-item" onclick="alert('Opening DSA Notes folder')">
+                    <div class="drive-icon">📂</div>
+                    <div class="drive-name">DSA Notes</div>
+                    <div class="drive-meta">12 files • 24 MB</div>
+                </div>
+                <div class="drive-item" onclick="alert('Opening OS Lectures folder')">
+                    <div class="drive-icon">📂</div>
+                    <div class="drive-name">OS Lectures</div>
+                    <div class="drive-meta">8 files • 156 MB</div>
+                </div>
+                <div class="drive-item" onclick="alert('Opening ML Research folder')">
+                    <div class="drive-icon">📂</div>
+                    <div class="drive-name">ML Research</div>
+                    <div class="drive-meta">5 files • 12 MB</div>
+                </div>
+                <div class="drive-item" onclick="alert('Opening file')">
+                    <div class="drive-icon">📄</div>
+                    <div class="drive-name">Software_Design_Patterns.pdf</div>
+                    <div class="drive-meta">2.4 MB • Modified today</div>
+                </div>
+                <div class="drive-item" onclick="alert('Opening file')">
+                    <div class="drive-icon">📝</div>
+                    <div class="drive-name">CN_Chapter5_Notes.md</div>
+                    <div class="drive-meta">18 KB • Modified yesterday</div>
+                </div>
+                <div class="drive-item" onclick="alert('Opening file')">
+                    <div class="drive-icon">📊</div>
+                    <div class="drive-name">ML_Lab3_Results.xlsx</div>
+                    <div class="drive-meta">340 KB • Jan 12</div>
+                </div>
+                <div class="drive-item" onclick="alert('Opening file')">
+                    <div class="drive-icon">🖼️</div>
+                    <div class="drive-name">System_Architecture_Diagram.png</div>
+                    <div class="drive-meta">1.2 MB • Jan 10</div>
+                </div>
+                <div class="drive-item" onclick="alert('Opening file')">
+                    <div class="drive-icon">📄</div>
+                    <div class="drive-name">Thesis_Draft_v2.docx</div>
+                    <div class="drive-meta">890 KB • Jan 8</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== GITHUB ===== -->
+        <div class="page-view" id="page-github">
+            <div class="page-header">
+                <div class="page-title">GitHub</div>
+            </div>
+            <div class="iframe-container">
+                <div class="iframe-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <div style="font-size:16px;font-weight:600">GitHub Integration</div>
+                    <div style="font-size:13px">Your repositories and code will load here in-app</div>
+                    <button class="btn primary" onclick="alert('GitHub OAuth would initiate')">Connect GitHub Account</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== GMAIL ===== -->
+        <div class="page-view" id="page-gmail">
+            <div class="page-header">
+                <div class="page-title">Gmail</div>
+            </div>
+            <div class="iframe-container">
+                <div class="iframe-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <div style="font-size:16px;font-weight:600">Gmail Integration</div>
+                    <div style="font-size:13px">Your inbox will load here in-app</div>
+                    <button class="btn primary" onclick="alert('Gmail OAuth would initiate')">Connect Gmail Account</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TEAM DISCUSSION ===== -->
+        <div class="page-view" id="page-team">
+            <div class="page-header">
+                <div class="page-title">Team Discussion</div>
+                <button class="btn" onclick="alert('New group created')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    New Group
+                </button>
+            </div>
+            <div class="chat-container">
+                <div style="display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:8px">
+                    <div class="quick-action-chip" style="background:var(--accent-primary);color:white;border-color:var(--accent-primary)">🤖 ML Project</div>
+                    <div class="quick-action-chip" onclick="alert('Switching channel')">📊 DSA Study Group</div>
+                    <div class="quick-action-chip" onclick="alert('Switching channel')">🎮 Gaming Club</div>
+                    <div class="quick-action-chip" onclick="alert('Switching channel')">📝 Thesis Team</div>
+                </div>
+                <div class="chat-messages">
+                    <div class="chat-msg">
+                        <div class="chat-avatar" style="background:var(--accent-green)">SP</div>
+                        <div>
+                            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Sarah Park • 2:30 PM</div>
+                            <div class="chat-bubble">Hey team! I just pushed the updated neural network model to the repo. Can someone review the training accuracy?</div>
+                        </div>
+                    </div>
+                    <div class="chat-msg">
+                        <div class="chat-avatar" style="background:var(--accent-orange)">RJ</div>
+                        <div>
+                            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Raj Joshi • 2:45 PM</div>
+                            <div class="chat-bubble">On it! The loss function looks much better now. I'll run the validation set tonight.</div>
+                        </div>
+                    </div>
+                    <div class="chat-msg sent">
+                        <div class="chat-avatar" style="background:var(--accent-primary)">AK</div>
+                        <div>
+                            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;text-align:right">You • 3:00 PM</div>
+                            <div class="chat-bubble">Great work! I'll prepare the presentation slides for tomorrow's meeting with Prof. Williams. 🚀</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-bar">
+                    <input type="text" class="chat-input" placeholder="Type a message..." id="chatInput">
+                    <button class="btn primary" onclick="sendChat()">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MENTAL HEALTH ===== -->
+        <div class="page-view" id="page-mental">
+            <div class="page-header">
+                <div class="page-title">Mental Health & Wellness</div>
+            </div>
+            <div class="dashboard-grid">
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🎯 How are you feeling today?</div>
+                        </div>
+                        <div class="mood-grid">
+                            <div class="mood-option" onclick="selectMood(this, 'great')">😄</div>
+                            <div class="mood-option" onclick="selectMood(this, 'good')">🙂</div>
+                            <div class="mood-option" onclick="selectMood(this, 'okay')">😐</div>
+                            <div class="mood-option" onclick="selectMood(this, 'low')">😔</div>
+                            <div class="mood-option" onclick="selectMood(this, 'stressed')">😰</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top:16px">
+                        <div class="card-header">
+                            <div class="card-title">📊 Weekly Mood Tracker</div>
+                        </div>
+                        <div class="weekly-chart">
+                            <div class="chart-bar" style="height:70%;background:var(--accent-green)"><span class="chart-bar-label">Mon</span></div>
+                            <div class="chart-bar" style="height:85%;background:var(--accent-cyan)"><span class="chart-bar-label">Tue</span></div>
+                            <div class="chart-bar" style="height:60%;background:var(--accent-orange)"><span class="chart-bar-label">Wed</span></div>
+                            <div class="chart-bar" style="height:90%;background:var(--accent-green)"><span class="chart-bar-label">Thu</span></div>
+                            <div class="chart-bar" style="height:75%;background:var(--accent-cyan)"><span class="chart-bar-label">Fri</span></div>
+                            <div class="chart-bar" style="height:80%;background:var(--accent-primary)"><span class="chart-bar-label">Sat</span></div>
+                            <div class="chart-bar" style="height:45%;background:var(--accent-orange)"><span class="chart-bar-label">Sun</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🤖 Wellness AI Support</div>
+                        </div>
+                        <div class="ai-messages">
+                            <div class="ai-msg bot">Hi Alex! I noticed your stress levels have been slightly elevated this week. Would you like some suggestions for relaxation techniques or study break activities? 💆‍♂️</div>
+                        </div>
+                        <div class="ai-input-area">
+                            <input type="text" class="ai-input" placeholder="Talk to wellness AI..." id="wellnessInput">
+                            <button class="ai-send" onclick="sendWellnessMsg()">Send</button>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top:16px">
+                        <div class="card-header">
+                            <div class="card-title">💡 Daily Tips</div>
+                        </div>
+                        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">🧘 Try a 5-minute breathing exercise between study sessions</div>
+                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">💧 You've been studying for 2 hours — stay hydrated!</div>
+                            <div style="padding:8px 0">🌙 Aim for 7-8 hours of sleep for optimal memory retention</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CLASS HOME ===== -->
+        <div class="page-view" id="page-classHome">
+            <div class="greeting-section animate-in">
+                <div class="greeting-text">Class Dashboard</div>
+                <div class="greeting-sub">CS-2024 Section A • 5 subjects this semester</div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div>
+                    <div class="card animate-in">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                                Upcoming Lectures
+                            </div>
+                            <span class="card-action">View Schedule</span>
+                        </div>
+                        <div class="lecture-card" onclick="enterFocusMode()">
+                            <div class="lecture-time-block">
+                                <div class="lecture-time">10:00</div>
+                                <div class="lecture-period">AM</div>
+                            </div>
+                            <div class="lecture-info">
+                                <div class="lecture-name">Data Structures & Algorithms</div>
+                                <div class="lecture-prof">Prof. Dr. Sarah Chen • Room 204</div>
+                            </div>
+                            <div class="lecture-status" style="background:rgba(239,68,68,0.15);color:var(--accent-red)">● LIVE</div>
+                        </div>
+                        <div class="lecture-card">
+                            <div class="lecture-time-block">
+                                <div class="lecture-time">11:30</div>
+                                <div class="lecture-period">AM</div>
+                            </div>
+                            <div class="lecture-info">
+                                <div class="lecture-name">Operating Systems</div>
+                                <div class="lecture-prof">Dr. James Wilson • Room 301</div>
+                            </div>
+                            <div class="lecture-status" style="background:var(--badge-bg);color:var(--accent-primary)">In 90 min</div>
+                        </div>
+                        <div class="lecture-card">
+                            <div class="lecture-time-block">
+                                <div class="lecture-time">2:00</div>
+                                <div class="lecture-period">PM</div>
+                            </div>
+                            <div class="lecture-info">
+                                <div class="lecture-name">Machine Learning Lab</div>
+                                <div class="lecture-prof">Prof. Williams • Lab 5</div>
+                            </div>
+                            <div class="lecture-status" style="background:rgba(52,211,153,0.15);color:var(--accent-green)">Scheduled</div>
+                        </div>
+                    </div>
+
+                    <div class="card animate-in" style="margin-top:16px">
+                        <div class="card-header">
+                            <div class="card-title">📋 Due Assignments</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:var(--accent-red)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">OS Lab Report — Process Scheduling</div>
+                                <div class="activity-meta" style="color:var(--accent-red)">Due in 3 hours!</div>
+                            </div>
+                            <button class="btn" style="font-size:11px;padding:4px 10px" onclick="alert('Opening submission')">Submit</button>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:var(--accent-orange)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">ML Project Phase 2 Report</div>
+                                <div class="activity-meta">Due in 2 days</div>
+                            </div>
+                            <button class="btn" style="font-size:11px;padding:4px 10px" onclick="alert('Opening submission')">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card animate-in">
+                        <div class="card-header">
+                            <div class="card-title">📊 Subject Progress</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>🟣 Data Structures</span><span>92%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:92%;background:var(--accent-primary)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>🔵 Operating Systems</span><span>78%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:78%;background:var(--accent-cyan)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>🟢 Machine Learning</span><span>65%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:65%;background:var(--accent-green)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>🟠 Software Eng.</span><span>88%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:88%;background:var(--accent-orange)"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label"><span>🩷 Computer Networks</span><span>71%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:71%;background:var(--accent-pink)"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="card animate-in" style="margin-top:16px">
+                        <div class="card-header">
+                            <div class="card-title">📢 Announcements</div>
+                        </div>
+                        <div style="font-size:13px;color:var(--text-secondary)">
+                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">
+                                <div style="font-weight:600;color:var(--text-primary)">Mid-semester exams start Feb 1</div>
+                                <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Posted by Admin • 1 day ago</div>
+                            </div>
+                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">
+                                <div style="font-weight:600;color:var(--text-primary)">ML Lab shifted to Lab 5 this week</div>
+                                <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Prof. Williams • 2 days ago</div>
+                            </div>
+                            <div style="padding:8px 0">
+                                <div style="font-weight:600;color:var(--text-primary)">Hackathon registration open</div>
+                                <div style="font-size:11px;color:var(--text-muted);margin-top:2px">CS Dept • 3 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== LIVE LECTURES ===== -->
+        <div class="page-view" id="page-liveLectures">
+            <div class="page-header">
+                <div class="page-title">Live Lectures</div>
+            </div>
+            <div class="card" style="margin-bottom:16px">
+                <div class="card-header"><div class="card-title"><div class="live-dot" style="margin-right:6px"></div>Currently Live</div></div>
+                <div class="lecture-card" onclick="enterFocusMode()" style="border-color:var(--accent-red)">
+                    <div class="lecture-time-block">
+                        <div class="lecture-time">10:00</div>
+                        <div class="lecture-period">AM</div>
+                    </div>
+                    <div class="lecture-info">
+                        <div class="lecture-name">Data Structures & Algorithms</div>
+                        <div class="lecture-prof">Prof. Dr. Sarah Chen • Binary Trees & Traversals</div>
+                    </div>
+                    <button class="btn primary" style="font-size:11px">Join Focus Mode</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><div class="card-title">📅 Today's Remaining Lectures</div></div>
+                <div class="lecture-card">
+                    <div class="lecture-time-block"><div class="lecture-time">11:30</div><div class="lecture-period">AM</div></div>
+                    <div class="lecture-info"><div class="lecture-name">Operating Systems</div><div class="lecture-prof">Dr. James Wilson</div></div>
+                    <div class="lecture-status" style="background:var(--badge-bg);color:var(--accent-primary)">In 90 min</div>
+                </div>
+                <div class="lecture-card">
+                    <div class="lecture-time-block"><div class="lecture-time">2:00</div><div class="lecture-period">PM</div></div>
+                    <div class="lecture-info"><div class="lecture-name">Machine Learning Lab</div><div class="lecture-prof">Prof. Williams</div></div>
+                    <div class="lecture-status" style="background:rgba(52,211,153,0.15);color:var(--accent-green)">Scheduled</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SUBJECT PRIORITY ===== -->
+        <div class="page-view" id="page-subjectPriority">
+            <div class="page-header">
+                <div class="page-title">Subject Prioritization</div>
+            </div>
+            <div class="card" style="margin-bottom:16px">
+                <div class="card-header"><div class="card-title">🎯 Focus Recommendations</div></div>
+                <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">Based on your marks and progress, here's where you should focus more:</p>
+                <div class="priority-card">
+                    <div class="priority-rank" style="background:var(--accent-red)">1</div>
+                    <div class="priority-info">
+                        <div class="priority-subject">Machine Learning — 65%</div>
+                        <div class="priority-reason">⚠️ Below average. Focus on neural networks and backpropagation concepts.</div>
+                    </div>
+                    <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:65%;background:var(--accent-red)"></div></div>
+                </div>
+                <div class="priority-card">
+                    <div class="priority-rank" style="background:var(--accent-orange)">2</div>
+                    <div class="priority-info">
+                        <div class="priority-subject">Computer Networks — 71%</div>
+                        <div class="priority-reason">Needs improvement in TCP/IP and routing algorithms.</div>
+                    </div>
+                    <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:71%;background:var(--accent-orange)"></div></div>
+                </div>
+                <div class="priority-card">
+                    <div class="priority-rank" style="background:var(--accent-yellow)">3</div>
+                    <div class="priority-info">
+                        <div class="priority-subject">Operating Systems — 78%</div>
+                        <div class="priority-reason">Good progress. Review process synchronization topics.</div>
+                    </div>
+                    <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:78%;background:var(--accent-yellow)"></div></div>
+                </div>
+                <div class="priority-card">
+                    <div class="priority-rank" style="background:var(--accent-green)">4</div>
+                    <div class="priority-info">
+                        <div class="priority-subject">Software Engineering — 88%</div>
+                        <div class="priority-reason">✅ On track! Maintain consistency.</div>
+                    </div>
+                    <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:88%;background:var(--accent-green)"></div></div>
+                </div>
+                <div class="priority-card">
+                    <div class="priority-rank" style="background:var(--accent-cyan)">5</div>
+                    <div class="priority-info">
+                        <div class="priority-subject">Data Structures — 92%</div>
+                        <div class="priority-reason">🌟 Excellent! You're ahead of the class.</div>
+                    </div>
+                    <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:92%;background:var(--accent-cyan)"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== GROUP PROJECTS ===== -->
+        <div class="page-view" id="page-groupProjects">
+            <div class="page-header">
+                <div class="page-title">Group Projects</div>
+                <button class="btn primary" onclick="alert('Create new project')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    New Project
+                </button>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-name">🤖 Neural Network Image Classifier</div>
+                    <div style="font-size:11px;color:var(--accent-green);font-weight:600">75% Complete</div>
+                </div>
+                <div class="progress-track" style="margin-bottom:12px"><div class="progress-fill" style="width:75%;background:var(--accent-green)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div class="project-members">
+                        <div class="project-member" style="background:var(--accent-primary)">AK</div>
+                        <div class="project-member" style="background:var(--accent-green)">SP</div>
+                        <div class="project-member" style="background:var(--accent-orange)">RJ</div>
+                        <div class="project-member" style="background:var(--accent-pink)">LM</div>
+                    </div>
+                    <div style="display:flex;gap:6px">
+                        <button class="btn" style="font-size:11px;padding:4px 10px" onclick="alert('Opening discussion')">Discussion</button>
+                        <button class="btn" style="font-size:11px;padding:4px 10px" onclick="alert('Adding member')">+ Add</button>
+                    </div>
+                </div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:8px">Mentor: Prof. Williams • Due: Feb 15, 2025</div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-name">🌐 Distributed File System</div>
+                    <div style="font-size:11px;color:var(--accent-orange);font-weight:600">40% Complete</div>
+                </div>
+                <div class="progress-track" style="margin-bottom:12px"><div class="progress-fill" style="width:40%;background:var(--accent-orange)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div class="project-members">
+                        <div class="project-member" style="background:var(--accent-primary)">AK</div>
+                        <div class="project-member" style="background:var(--accent-cyan)">DK</div>
+                        <div class="project-member" style="background:var(--accent-yellow)">MT</div>
+                    </div>
+                    <div style="display:flex;gap:6px">
+                        <button class="btn" style="font-size:11px;padding:4px 10px" onclick="alert('Opening discussion')">Discussion</button>
+                        <button class="btn" style="font-size:11px;padding:4px 10px" onclick="alert('Adding member')">+ Add</button>
+                    </div>
+                </div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:8px">Mentor: Dr. Wilson • Due: Mar 1, 2025</div>
+            </div>
+        </div>
+
+        <!-- ===== TIMETABLE ===== -->
+        <div class="page-view" id="page-timetable">
+            <div class="page-header">
+                <div class="page-title">Time Table</div>
+                <button class="btn" onclick="alert('Contacting teacher')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Contact Teacher
+                </button>
+            </div>
+            <div class="card">
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Subject</th>
+                            <th>Professor</th>
+                            <th>Room</th>
+                            <th>Attendance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">09:00 - 10:00</td>
+                            <td><span class="subject-dot" style="display:inline-block;background:var(--accent-primary);margin-right:6px"></span>Data Structures</td>
+                            <td>Dr. Sarah Chen</td>
+                            <td>Room 204</td>
+                            <td><span class="attendance-badge" style="background:rgba(52,211,153,0.15);color:var(--accent-green)">92%</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">10:15 - 11:15</td>
+                            <td><span class="subject-dot" style="display:inline-block;background:var(--accent-cyan);margin-right:6px"></span>Operating Systems</td>
+                            <td>Dr. James Wilson</td>
+                            <td>Room 301</td>
+                            <td><span class="attendance-badge" style="background:rgba(251,146,60,0.15);color:var(--accent-orange)">78%</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">11:30 - 12:30</td>
+                            <td><span class="subject-dot" style="display:inline-block;background:var(--accent-green);margin-right:6px"></span>Machine Learning</td>
+                            <td>Prof. Williams</td>
+                            <td>Lab 5</td>
+                            <td><span class="attendance-badge" style="background:rgba(52,211,153,0.15);color:var(--accent-green)">85%</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">14:00 - 15:00</td>
+                            <td><span class="subject-dot" style="display:inline-block;background:var(--accent-orange);margin-right:6px"></span>Software Engineering</td>
+                            <td>Dr. Emily Davis</td>
+                            <td>Room 102</td>
+                            <td><span class="attendance-badge" style="background:rgba(52,211,153,0.15);color:var(--accent-green)">95%</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">15:15 - 16:15</td>
+                            <td><span class="subject-dot" style="display:inline-block;background:var(--accent-pink);margin-right:6px"></span>Computer Networks</td>
+                            <td>Dr. Robert Lee</td>
+                            <td>Room 205</td>
+                            <td><span class="attendance-badge" style="background:rgba(239,68,68,0.15);color:var(--accent-red)">68%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== TEACHER HOME ===== -->
+        <div class="page-view" id="page-teacherHome">
+            <div class="greeting-section animate-in">
+                <div class="greeting-text">Welcome, <span class="highlight">Dr. Williams</span> 🎓</div>
+                <div class="greeting-sub">
+                    <span class="greeting-date">Wednesday, Jan 15, 2025</span> — You have 3 lectures and 12 pending assignments to review today.
+                </div>
+            </div>
+
+            <div class="stat-row animate-in">
+                <div class="stat-card">
+                    <div class="stat-value" style="color:var(--accent-primary)">156</div>
+                    <div class="stat-label">Total Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:var(--accent-green)">89%</div>
+                    <div class="stat-label">Avg Attendance</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:var(--accent-orange)">12</div>
+                    <div class="stat-label">Pending Reviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:var(--accent-cyan)">5</div>
+                    <div class="stat-label">Student Queries</div>
+                </div>
+            </div>
+
+            <div class="teacher-grid animate-in">
+                <div class="teacher-action-card" onclick="navigateTo('teacher', 'attendance')">
+                    <div class="teacher-icon" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+                    </div>
+                    <div class="teacher-card-title">Take Attendance</div>
+                    <div class="teacher-card-desc">Mark student attendance for today's class</div>
+                </div>
+                <div class="teacher-action-card" onclick="navigateTo('teacher', 'createLecture')">
+                    <div class="teacher-icon" style="background:linear-gradient(135deg,#22d3ee,#0891b2)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    </div>
+                    <div class="teacher-card-title">Create Lecture</div>
+                    <div class="teacher-card-desc">Schedule or start a new lecture session</div>
+                </div>
+                <div class="teacher-action-card" onclick="navigateTo('teacher', 'uploadAssignment')">
+                    <div class="teacher-icon" style="background:linear-gradient(135deg,#34d399,#059669)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    </div>
+                    <div class="teacher-card-title">Upload Assignment</div>
+                    <div class="teacher-card-desc">Create and distribute assignments</div>
+                </div>
+                <div class="teacher-action-card" onclick="navigateTo('teacher', 'giveMarks')">
+                    <div class="teacher-icon" style="background:linear-gradient(135deg,#fb923c,#ea580c)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </div>
+                    <div class="teacher-card-title">Give Marks</div>
+                    <div class="teacher-card-desc">Grade assignments and exams</div>
+                </div>
+                <div class="teacher-action-card" onclick="navigateTo('teacher', 'createFeedback')">
+                    <div class="teacher-icon" style="background:linear-gradient(135deg,#f472b6,#db2777)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <div class="teacher-card-title">Create Feedback</div>
+                    <div class="teacher-card-desc">Provide feedback to students</div>
+                </div>
+                <div class="teacher-action-card" onclick="navigateTo('teacher', 'resolveQueries')">
+                    <div class="teacher-icon" style="background:linear-gradient(135deg,#fbbf24,#d97706)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <div class="teacher-card-title">Resolve Queries</div>
+                    <div class="teacher-card-desc">Answer student questions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TEACHER FORMS ===== -->
+        <div class="page-view" id="page-attendance">
+            <div class="page-header"><div class="page-title">Take Attendance</div></div>
+            <div class="card">
+                <div class="form-group">
+                    <label class="form-label">Subject</label>
+                    <select class="form-select"><option>Machine Learning</option><option>Data Structures</option><option>Operating Systems</option></select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Section</label>
+                    <select class="form-select"><option>CS-2024 Section A</option><option>CS-2024 Section B</option></select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-input" value="2025-01-15">
+                </div>
+                <div style="margin-top:16px">
+                    <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:10px">STUDENTS</div>
+                    <div style="display:flex;flex-direction:column;gap:6px">
+                        <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--input-bg);border-radius:8px">
+                            <input type="checkbox" checked style="accent-color:var(--accent-green);width:16px;height:16px;cursor:pointer">
+                            <span style="font-size:13px;flex:1">Alex Kumar</span>
+                            <span style="font-size:11px;color:var(--accent-green)">Present</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--input-bg);border-radius:8px">
+                            <input type="checkbox" checked style="accent-color:var(--accent-green);width:16px;height:16px;cursor:pointer">
+                            <span style="font-size:13px;flex:1">Sarah Park</span>
+                            <span style="font-size:11px;color:var(--accent-green)">Present</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--input-bg);border-radius:8px">
+                            <input type="checkbox" style="accent-color:var(--accent-green);width:16px;height:16px;cursor:pointer">
+                            <span style="font-size:13px;flex:1">Raj Joshi</span>
+                            <span style="font-size:11px;color:var(--accent-red)">Absent</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--input-bg);border-radius:8px">
+                            <input type="checkbox" checked style="accent-color:var(--accent-green);width:16px;height:16px;cursor:pointer">
+                            <span style="font-size:13px;flex:1">Lisa Miller</span>
+                            <span style="font-size:11px;color:var(--accent-green)">Present</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn primary" style="margin-top:16px" onclick="alert('Attendance saved successfully!')">Save Attendance</button>
+            </div>
+        </div>
+
+        <div class="page-view" id="page-createLecture">
+            <div class="page-header"><div class="page-title">Create Lecture</div></div>
+            <div class="card" style="max-width:600px">
+                <div class="form-group"><label class="form-label">Lecture Title</label><input type="text" class="form-input" placeholder="e.g., Introduction to Neural Networks"></div>
+                <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>Machine Learning</option><option>Data Structures</option><option>Operating Systems</option></select></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                    <div class="form-group"><label class="form-label">Date</label><input type="date" class="form-input" value="2025-01-16"></div>
+                    <div class="form-group"><label class="form-label">Time</label><input type="time" class="form-input" value="10:00"></div>
+                </div>
+                <div class="form-group"><label class="form-label">Room / Lab</label><input type="text" class="form-input" placeholder="e.g., Lab 5"></div>
+                <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" placeholder="Lecture description and topics to cover..."></textarea></div>
+                <div style="display:flex;gap:8px">
+                    <button class="btn primary" onclick="alert('Lecture created successfully!')">Create Lecture</button>
+                    <button class="btn" onclick="alert('Starting live lecture...')">Start Live Now</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-view" id="page-uploadAssignment">
+            <div class="page-header"><div class="page-title">Upload Assignment</div></div>
+            <div class="card" style="max-width:600px">
+                <div class="form-group"><label class="form-label">Assignment Title</label><input type="text" class="form-input" placeholder="e.g., Lab Assignment #4"></div>
+                <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>Machine Learning</option><option>Data Structures</option><option>Operating Systems</option></select></div>
+                <div class="form-group"><label class="form-label">Due Date</label><input type="datetime-local" class="form-input"></div>
+                <div class="form-group"><label class="form-label">Total Marks</label><input type="number" class="form-input" placeholder="100"></div>
+                <div class="form-group"><label class="form-label">Instructions</label><textarea class="form-textarea" placeholder="Assignment instructions and requirements..."></textarea></div>
+                <div class="form-group">
+                    <label class="form-label">Attach Files</label>
+                    <div style="border:2px dashed var(--border-color);border-radius:10px;padding:30px;text-align:center;cursor:pointer" onclick="alert('File picker would open')">
+                        <div style="font-size:28px;margin-bottom:8px">📎</div>
+                        <div style="font-size:13px;color:var(--text-muted)">Drag files here or click to browse</div>
+                    </div>
+                </div>
+                <button class="btn primary" onclick="alert('Assignment uploaded successfully!')">Upload Assignment</button>
+            </div>
+        </div>
+
+        <div class="page-view" id="page-giveMarks">
+            <div class="page-header"><div class="page-title">Give Marks</div></div>
+            <div class="card" style="max-width:700px">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+                    <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>Machine Learning</option><option>Data Structures</option></select></div>
+                    <div class="form-group"><label class="form-label">Assignment</label><select class="form-select"><option>Lab Assignment #3</option><option>Mid-term Exam</option></select></div>
+                </div>
+                <table class="timetable">
+                    <thead><tr><th>Student</th><th>Submission</th><th>Marks (out of 100)</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td>Alex Kumar</td><td><span style="color:var(--accent-green);font-size:12px">✓ Submitted</span></td><td><input type="number" class="form-input" style="width:80px;padding:6px 10px" value="95"></td><td><button class="btn" style="font-size:11px;padding:3px 8px" onclick="alert('Marks saved')">Save</button></td></tr>
+                        <tr><td>Sarah Park</td><td><span style="color:var(--accent-green);font-size:12px">✓ Submitted</span></td><td><input type="number" class="form-input" style="width:80px;padding:6px 10px" value="88"></td><td><button class="btn" style="font-size:11px;padding:3px 8px" onclick="alert('Marks saved')">Save</button></td></tr>
+                        <tr><td>Raj Joshi</td><td><span style="color:var(--accent-orange);font-size:12px">⏳ Late</span></td><td><input type="number" class="form-input" style="width:80px;padding:6px 10px" placeholder="--"></td><td><button class="btn" style="font-size:11px;padding:3px 8px" onclick="alert('Marks saved')">Save</button></td></tr>
+                        <tr><td>Lisa Miller</td><td><span style="color:var(--accent-red);font-size:12px">✗ Not submitted</span></td><td><input type="number" class="form-input" style="width:80px;padding:6px 10px" placeholder="--" disabled></td><td><button class="btn" style="font-size:11px;padding:3px 8px" onclick="alert('Reminder sent')">Remind</button></td></tr>
+                    </tbody>
+                </table>
+                <button class="btn primary" style="margin-top:16px" onclick="alert('All marks saved!')">Save All Marks</button>
+            </div>
+        </div>
+
+        <div class="page-view" id="page-createFeedback">
+            <div class="page-header"><div class="page-title">Create Feedback</div></div>
+            <div class="card" style="max-width:600px">
+                <div class="form-group"><label class="form-label">Student</label><select class="form-select"><option>Alex Kumar</option><option>Sarah Park</option><option>Raj Joshi</option><option>Lisa Miller</option><option>All Students</option></select></div>
+                <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>Machine Learning</option><option>Data Structures</option></select></div>
+                <div class="form-group"><label class="form-label">Feedback Type</label><select class="form-select"><option>Assignment Review</option><option>Performance Review</option><option>General Feedback</option><option>Encouragement</option></select></div>
+                <div class="form-group"><label class="form-label">Feedback Message</label><textarea class="form-textarea" placeholder="Write your feedback here..." rows="5"></textarea></div>
+                <button class="btn primary" onclick="alert('Feedback sent successfully!')">Send Feedback</button>
+            </div>
+        </div>
+
+        <div class="page-view" id="page-resolveQueries">
+            <div class="page-header"><div class="page-title">Student Queries</div></div>
+            <div class="card" style="margin-bottom:12px">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                    <div class="avatar-circle" style="width:32px;height:32px;font-size:11px;border-radius:8px;background:linear-gradient(135deg,var(--accent-primary),var(--accent-cyan))">AK</div>
+                    <div><div style="font-size:13px;font-weight:600">Alex Kumar</div><div style="font-size:11px;color:var(--text-muted)">Machine Learning • 2 hours ago</div></div>
+                    <span class="attendance-badge" style="margin-left:auto;background:rgba(251,146,60,0.15);color:var(--accent-orange)">Pending</span>
+                </div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Professor, can you explain the difference between gradient descent and stochastic gradient descent? I'm confused about when to use mini-batch.</div>
+                <div class="ai-input-area">
+                    <input type="text" class="ai-input" placeholder="Type your response...">
+                    <button class="ai-send" onclick="alert('Response sent to Alex Kumar!')">Reply</button>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:12px">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                    <div class="avatar-circle" style="width:32px;height:32px;font-size:11px;border-radius:8px;background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan))">SP</div>
+                    <div><div style="font-size:13px;font-weight:600">Sarah Park</div><div style="font-size:11px;color:var(--text-muted)">Machine Learning • 5 hours ago</div></div>
+                    <span class="attendance-badge" style="margin-left:auto;background:rgba(251,146,60,0.15);color:var(--accent-orange)">Pending</span>
+                </div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Can we get an extension on the Phase 2 report? Our team ran into issues with the dataset preprocessing.</div>
+                <div class="ai-input-area">
+                    <input type="text" class="ai-input" placeholder="Type your response...">
+                    <button class="ai-send" onclick="alert('Response sent to Sarah Park!')">Reply</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-view" id="page-uploadResources">
+            <div class="page-header"><div class="page-title">Upload Resources</div></div>
+            <div class="card" style="max-width:600px">
+                <div class="form-group"><label class="form-label">Resource Title</label><input type="text" class="form-input" placeholder="e.g., Chapter 5 Lecture Slides"></div>
+                <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>Machine Learning</option><option>Data Structures</option></select></div>
+                <div class="form-group"><label class="form-label">Resource Type</label><select class="form-select"><option>Lecture Slides</option><option>Reference Material</option><option>Tutorial Video</option><option>Practice Problems</option></select></div>
+                <div class="form-group">
+                    <label class="form-label">Upload Files</label>
+                    <div style="border:2px dashed var(--border-color);border-radius:10px;padding:30px;text-align:center;cursor:pointer" onclick="alert('File picker would open')">
+                        <div style="font-size:28px;margin-bottom:8px">📁</div>
+                        <div style="font-size:13px;color:var(--text-muted)">Drag files here or click to browse</div>
+                        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">PDF, PPTX, DOCX, MP4 up to 500MB</div>
+                    </div>
+                </div>
+                <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" placeholder="Optional description..."></textarea></div>
+                <button class="btn primary" onclick="alert('Resources uploaded successfully!')">Upload Resources</button>
+            </div>
+        </div>
+
+    </div><!-- end main-dashboard -->
+
+</div><!-- end app-layout -->
+
+<!-- ===== POPUP PANEL TEMPLATES (dynamically created) ===== -->
+
+<script>
+    // ===== STATE MANAGEMENT =====
+    let currentMode = 'student';
+    let currentPage = { student: 'home', class: 'classHome', teacher: 'teacherHome' };
+    let openPopups = {};
+    let popupZIndex = 600;
+    let pomodoroInterval = null;
+    let pomodoroSeconds = 25 * 60;
+    let pomodoroRunning = false;
+
+    // ===== THEME TOGGLE =====
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+
+    // ===== MODE SWITCHING =====
+    function switchMode(mode) {
+        currentMode = mode;
+
+        // Update toggle buttons
+        document.querySelectorAll('.mode-toggle-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.mode === mode);
+        });
+
+        // Show/hide resource bars
+        document.getElementById('resourceBar-student').classList.toggle('hidden', mode !== 'student');
+        document.getElementById('resourceBar-class').classList.toggle('hidden', mode !== 'class');
+
+        // No resource bar for teacher
+        if (mode === 'teacher') {
+            document.getElementById('resourceBar-student').classList.add('hidden');
+            document.getElementById('resourceBar-class').classList.add('hidden');
+        }
+
+        // Show/hide nav bars
+        document.getElementById('navBar-student').style.display = mode === 'student' ? 'flex' : 'none';
+        document.getElementById('navBar-class').style.display = mode === 'class' ? 'flex' : 'none';
+        document.getElementById('navBar-teacher').style.display = mode === 'teacher' ? 'flex' : 'none';
+
+        // Show correct home page
+        navigateTo(mode, currentPage[mode]);
+
+        // Close popups
+        closeAllPopups();
+    }
+
+    // ===== NAVIGATION =====
+    function navigateTo(mode, page) {
+        currentPage[mode] = page;
+
+        // Hide all pages
+        document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+
+        // Show target page
+        const target = document.getElementById('page-' + page);
+        if (target) {
+            target.classList.add('active');
+            target.classList.add('animate-in');
+        }
+
+        // Update nav active state
+        const navBar = document.getElementById('navBar-' + mode);
+        if (navBar) {
+            navBar.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            // Find matching nav item
+            const navItems = navBar.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const onclick = item.getAttribute('onclick');
+                if (onclick && onclick.includes("'" + page + "'")) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    }
+
+    // ===== POPUP PANELS =====
+    function openPopup(type) {
+        if (openPopups[type]) {
+            // Bring to front
+            openPopups[type].style.zIndex = ++popupZIndex;
+            openPopups[type].classList.add('focused');
+            return;
+        }
+
+        const popup = document.createElement('div');
+        popup.className = 'popup-panel focused';
+        popup.style.zIndex = ++popupZIndex;
+        popup.dataset.type = type;
+
+        // Position
+        const offset = Object.keys(openPopups).length * 30;
+        popup.style.left = (200 + offset) + 'px';
+        popup.style.top = (80 + offset) + 'px';
+        popup.style.width = '360px';
+        popup.style.height = '400px';
+
+        popup.innerHTML = getPopupContent(type);
+
+        popup.addEventListener('mousedown', () => {
+            document.querySelectorAll('.popup-panel').forEach(p => p.classList.remove('focused'));
+            popup.classList.add('focused');
+            popup.style.zIndex = ++popupZIndex;
+        });
+
+        document.getElementById('mainDashboard').appendChild(popup);
+        openPopups[type] = popup;
+
+        // Make draggable
+        makeDraggable(popup);
+        makeResizable(popup);
+
+        // Init pomodoro if needed
+        if (type === 'pomodoro') {
+            updatePomodoroDisplay();
+        }
+    }
+
+    function getPopupContent(type) {
+        const configs = {
+            calendar: {
+                title: '📅 Calendar',
+                body: `
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                        <button class="pomo-btn" onclick="alert('Previous month')">◀</button>
+                        <span style="font-weight:600;font-size:14px">January 2025</span>
+                        <button class="pomo-btn" onclick="alert('Next month')">▶</button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="cal-header">Mo</div><div class="cal-header">Tu</div><div class="cal-header">We</div><div class="cal-header">Th</div><div class="cal-header">Fr</div><div class="cal-header">Sa</div><div class="cal-header">Su</div>
+                        <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day has-event">3</div><div class="cal-day">4</div><div class="cal-day">5</div>
+                        <div class="cal-day">6</div><div class="cal-day has-event">7</div><div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day has-event">10</div><div class="cal-day">11</div><div class="cal-day">12</div>
+                        <div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day today">15</div><div class="cal-day">16</div><div class="cal-day has-event">17</div><div class="cal-day">18</div><div class="cal-day">19</div>
+                        <div class="cal-day has-event">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div>
+                        <div class="cal-day">27</div><div class="cal-day has-event">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day">31</div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+                    </div>
+                    <div style="margin-top:12px;font-size:12px">
+                        <div style="padding:6px 0;border-bottom:1px solid var(--border-color);display:flex;gap:8px"><span style="color:var(--accent-cyan)">●</span>Jan 15 — DSA Lecture 10:00 AM</div>
+                        <div style="padding:6px 0;border-bottom:1px solid var(--border-color);display:flex;gap:8px"><span style="color:var(--accent-red)">●</span>Jan 15 — OS Lab Due 6:00 PM</div>
+                        <div style="padding:6px 0;display:flex;gap:8px"><span style="color:var(--accent-green)">●</span>Jan 17 — ML Project Meeting</div>
+                    </div>
+                `
+            },
+            knowledge: {
+                title: '🌐 Knowledge Graph',
+                body: `
+                    <div class="kg-visual">
+                        <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Your connected topics</div>
+                        <div class="kg-node-grid">
+                            <div class="kg-node" style="border-color:var(--accent-primary);color:var(--accent-primary);background:rgba(139,92,246,0.1)" onclick="alert('Viewing Binary Trees topic')">Binary Trees</div>
+                            <div class="kg-node" style="border-color:var(--accent-cyan);color:var(--accent-cyan);background:rgba(34,211,238,0.1)" onclick="alert('Viewing Sorting topic')">Sorting</div>
+                            <div class="kg-node" style="border-color:var(--accent-green);color:var(--accent-green);background:rgba(52,211,153,0.1)" onclick="alert('Viewing Neural Nets topic')">Neural Nets</div>
+                            <div class="kg-node" style="border-color:var(--accent-orange);color:var(--accent-orange);background:rgba(251,146,60,0.1)" onclick="alert('Viewing TCP/IP topic')">TCP/IP</div>
+                            <div class="kg-node" style="border-color:var(--accent-pink);color:var(--accent-pink);background:rgba(244,114,182,0.1)" onclick="alert('Viewing Threads topic')">Threads</div>
+                            <div class="kg-node" style="border-color:var(--accent-yellow);color:var(--accent-yellow);background:rgba(251,191,36,0.1)" onclick="alert('Viewing Design Patterns topic')">Patterns</div>
+                            <div class="kg-node" style="border-color:var(--accent-primary);color:var(--accent-primary);background:rgba(139,92,246,0.1)" onclick="alert('Viewing Graphs topic')">Graphs</div>
+                            <div class="kg-node" style="border-color:var(--accent-cyan);color:var(--accent-cyan);background:rgba(34,211,238,0.1)" onclick="alert('Viewing Hashing topic')">Hashing</div>
+                            <div class="kg-node" style="border-color:var(--accent-green);color:var(--accent-green);background:rgba(52,211,153,0.1)" onclick="alert('Viewing CNN topic')">CNN</div>
+                        </div>
+                        <div style="margin-top:14px;font-size:11px;color:var(--text-muted)">Click a topic to explore connections</div>
+                    </div>
+                `
+            },
+            ai: {
+                title: '🤖 AI Assistant',
+                body: `
+                    <div class="ai-messages" id="aiMessages">
+                        <div class="ai-msg bot">Hello Alex! I'm your study assistant. Ask me anything about your courses, request explanations, or get study recommendations. How can I help? 🎓</div>
+                    </div>
+                    <div class="ai-input-area">
+                        <input type="text" class="ai-input" placeholder="Ask me anything..." id="aiInput" onkeydown="if(event.key==='Enter')sendAiMsg()">
+                        <button class="ai-send" onclick="sendAiMsg()">↑</button>
+                    </div>
+                `
+            },
+            pomodoro: {
+                title: '🍅 Pomodoro Timer',
+                body: `
+                    <div style="text-align:center">
+                        <div class="pomodoro-circle" id="pomodoroCircle">
+                            <svg class="pomodoro-ring" viewBox="0 0 148 148">
+                                <circle cx="74" cy="74" r="70" fill="none" stroke="var(--border-color)" stroke-width="4"/>
+                                <circle cx="74" cy="74" r="70" fill="none" stroke="var(--accent-primary)" stroke-width="4" stroke-dasharray="440" stroke-dashoffset="0" id="pomodoroRing" transform="rotate(-90 74 74)" stroke-linecap="round"/>
+                            </svg>
+                            <div class="pomodoro-time" id="pomodoroTime">25:00</div>
+                            <div class="pomodoro-label" id="pomodoroLabel">FOCUS TIME</div>
+                        </div>
+                        <div class="pomodoro-buttons">
+                            <button class="pomo-btn primary" id="pomodoroStartBtn" onclick="togglePomodoro()">Start</button>
+                            <button class="pomo-btn" onclick="resetPomodoro()">Reset</button>
+                        </div>
+                        <div style="display:flex;gap:8px;justify-content:center;margin-top:14px">
+                            <button class="pomo-btn" onclick="setPomodoroTime(25)" style="font-size:11px">25 min</button>
+                            <button class="pomo-btn" onclick="setPomodoroTime(15)" style="font-size:11px">15 min</button>
+                            <button class="pomo-btn" onclick="setPomodoroTime(5)" style="font-size:11px">5 min</button>
+                            <button class="pomo-btn" onclick="setPomodoroTime(50)" style="font-size:11px">50 min</button>
+                        </div>
+                        <div style="margin-top:14px;font-size:12px;color:var(--text-muted)">Sessions today: <strong style="color:var(--accent-primary)">4</strong></div>
+                    </div>
+                `
+            },
+            forest: {
+                title: '🌲 Forest Focus',
+                body: `
+                    <div class="forest-display">
+                        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Your Focus Forest</div>
+                        <div class="tree-grid">
+                            <div class="tree-cell">🌲</div>
+                            <div class="tree-cell">🌳</div>
+                            <div class="tree-cell">🌲</div>
+                            <div class="tree-cell">🌴</div>
+                            <div class="tree-cell">🌲</div>
+                            <div class="tree-cell">🌳</div>
+                            <div class="tree-cell">🌲</div>
+                            <div class="tree-cell">🌴</div>
+                            <div class="tree-cell">🌲</div>
+                            <div class="tree-cell">🌳</div>
+                            <div class="tree-cell">🌲</div>
+                            <div class="tree-cell">🌲</div>
+                            <div class="tree-cell empty">🌱</div>
+                            <div class="tree-cell empty">🌱</div>
+                            <div class="tree-cell empty">🌱</div>
+                        </div>
+                        <div class="forest-stats">
+                            <div class="forest-stat">
+                                <div class="forest-stat-val">47</div>
+                                <div class="forest-stat-label">Trees Planted</div>
+                            </div>
+                            <div class="forest-stat">
+                                <div class="forest-stat-val">19.5h</div>
+                                <div class="forest-stat-label">Total Focus</div>
+                            </div>
+                            <div class="forest-stat">
+                                <div class="forest-stat-val">3</div>
+                                <div class="forest-stat-label">Dead Trees</div>
+                            </div>
+                        </div>
+                        <button class="pomo-btn primary" style="margin-top:14px" onclick="alert('Starting focus session — plant a tree!')">🌱 Plant a Tree</button>
+                    </div>
+                `
+            },
+            profFeedback: {
+                title: '💬 Professor Feedback',
+                body: `
+                    <div style="display:flex;flex-direction:column;gap:12px">
+                        <div style="padding:12px;background:var(--input-bg);border-radius:10px;border-left:3px solid var(--accent-green)">
+                            <div style="font-size:12px;font-weight:600;margin-bottom:4px">Prof. Williams — Machine Learning</div>
+                            <div style="font-size:13px;color:var(--text-secondary)">Great improvement on the neural network assignment. Your implementation of backpropagation was well-structured. Keep it up!</div>
+                            <div style="font-size:10px;color:var(--text-muted);margin-top:6px">2 days ago</div>
+                        </div>
+                        <div style="padding:12px;background:var(--input-bg);border-radius:10px;border-left:3px solid var(--accent-orange)">
+                            <div style="font-size:12px;font-weight:600;margin-bottom:4px">Dr. Chen — Data Structures</div>
+                            <div style="font-size:13px;color:var(--text-secondary)">Your binary tree traversal solution was efficient but could be optimized further. Consider using iterative approach for large datasets.</div>
+                            <div style="font-size:10px;color:var(--text-muted);margin-top:6px">5 days ago</div>
+                        </div>
+                        <div style="padding:12px;background:var(--input-bg);border-radius:10px;border-left:3px solid var(--accent-primary)">
+                            <div style="font-size:12px;font-weight:600;margin-bottom:4px">Dr. Wilson — Operating Systems</div>
+                            <div style="font-size:13px;color:var(--text-secondary)">Good understanding of process scheduling concepts. Review mutex locks for the upcoming exam.</div>
+                            <div style="font-size:10px;color:var(--text-muted);margin-top:6px">1 week ago</div>
+                        </div>
+                    </div>
+                `
+            },
+            subjectHealth: {
+                title: '📊 Subject Health',
+                body: `
+                    <div class="subject-card" onclick="this.classList.toggle('expanded')">
+                        <div class="subject-header">
+                            <div class="subject-name"><div class="subject-dot" style="background:var(--accent-primary)"></div>Data Structures</div>
+                            <div class="subject-pct" style="color:var(--accent-primary)">92%</div>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width:92%;background:var(--accent-primary)"></div></div>
+                        <div class="subject-details">
+                            <div class="detail-row"><span>Mid-term</span><span>45/50</span></div>
+                            <div class="detail-row"><span>Lab Assignments</span><span>47/50</span></div>
+                            <div class="detail-row"><span>Quiz Average</span><span>9/10</span></div>
+                            <div class="detail-row"><span>Attendance</span><span>92%</span></div>
+                        </div>
+                    </div>
+                    <div class="subject-card" onclick="this.classList.toggle('expanded')">
+                        <div class="subject-header">
+                            <div class="subject-name"><div class="subject-dot" style="background:var(--accent-cyan)"></div>Operating Systems</div>
+                            <div class="subject-pct" style="color:var(--accent-cyan)">78%</div>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width:78%;background:var(--accent-cyan)"></div></div>
+                        <div class="subject-details">
+                            <div class="detail-row"><span>Mid-term</span><span>36/50</span></div>
+                            <div class="detail-row"><span>Lab Assignments</span><span>42/50</span></div>
+                            <div class="detail-row"><span>Quiz Average</span><span>8/10</span></div>
+                            <div class="detail-row"><span>Attendance</span><span>78%</span></div>
+                        </div>
+                    </div>
+                    <div class="subject-card" onclick="this.classList.toggle('expanded')">
+                        <div class="subject-header">
+                            <div class="subject-name"><div class="subject-dot" style="background:var(--accent-green)"></div>Machine Learning</div>
+                            <div class="subject-pct" style="color:var(--accent-green)">65%</div>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width:65%;background:var(--accent-green)"></div></div>
+                        <div class="subject-details">
+                            <div class="detail-row"><span>Mid-term</span><span>28/50</span></div>
+                            <div class="detail-row"><span>Lab Assignments</span><span>35/50</span></div>
+                            <div class="detail-row"><span>Quiz Average</span><span>7/10</span></div>
+                            <div class="detail-row"><span>Attendance</span><span>85%</span></div>
+                        </div>
+                    </div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Click a subject to expand details</div>
+                `
+            }
+        };
+
+        const config = configs[type] || { title: type, body: '<p>Content</p>' };
+
+        return `
+            <div class="popup-header" onmousedown="startDrag(event, this.parentElement)">
+                <div class="popup-title">${config.title}</div>
+                <div class="popup-controls">
+                    <div class="popup-ctrl minimize" onclick="minimizePopup('${type}')"></div>
+                    <div class="popup-ctrl maximize" onclick="maximizePopup('${type}')"></div>
+                    <div class="popup-ctrl close" onclick="closePopup('${type}')"></div>
+                </div>
+            </div>
+            <div class="popup-body">${config.body}</div>
+            <div class="popup-resize" onmousedown="startResize(event, this.parentElement)"></div>
+        `;
+    }
+
+    function closePopup(type) {
+        if (openPopups[type]) {
+            openPopups[type].remove();
+            delete openPopups[type];
+        }
+    }
+
+    function closeAllPopups() {
+        Object.keys(openPopups).forEach(type => closePopup(type));
+    }
+
+    function minimizePopup(type) {
+        const popup = openPopups[type];
+        if (popup) {
+            const body = popup.querySelector('.popup-body');
+            const resize = popup.querySelector('.popup-resize');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                resize.style.display = 'flex';
+                popup.style.height = popup.dataset.prevHeight || '400px';
+            } else {
+                popup.dataset.prevHeight = popup.style.height;
+                body.style.display = 'none';
+                resize.style.display = 'none';
+                popup.style.height = 'auto';
+            }
+        }
+    }
+
+    function maximizePopup(type) {
+        const popup = openPopups[type];
+        if (popup) {
+            if (popup.dataset.maximized === 'true') {
+                popup.style.left = popup.dataset.prevLeft;
+                popup.style.top = popup.dataset.prevTop;
+                popup.style.width = popup.dataset.prevWidth;
+                popup.style.height = popup.dataset.prevHeight2;
+                popup.dataset.maximized = 'false';
+            } else {
+                popup.dataset.prevLeft = popup.style.left;
+                popup.dataset.prevTop = popup.style.top;
+                popup.dataset.prevWidth = popup.style.width;
+                popup.dataset.prevHeight2 = popup.style.height;
+                popup.style.left = '20px';
+                popup.style.top = '20px';
+                popup.style.width = 'calc(100% - 40px)';
+                popup.style.height = 'calc(100% - 40px)';
+                popup.dataset.maximized = 'true';
+            }
+        }
+    }
+
+    // ===== DRAGGING =====
+    let dragState = { active: false, element: null, offsetX: 0, offsetY: 0 };
+
+    function makeDraggable(el) {
+        const header = el.querySelector('.popup-header');
+        if (!header) return;
+    }
+
+    function startDrag(e, el) {
+        if (e.target.classList.contains('popup-ctrl')) return;
+        e.preventDefault();
+        const rect = el.getBoundingClientRect();
+        const parentRect = el.parentElement.getBoundingClientRect();
+        dragState = {
+            active: true,
+            element: el,
+            offsetX: e.clientX - rect.left,
+            offsetY: e.clientY - rect.top,
+            parentLeft: parentRect.left,
+            parentTop: parentRect.top
+        };
+        document.querySelectorAll('.popup-panel').forEach(p => p.classList.remove('focused'));
+        el.classList.add('focused');
+        el.style.zIndex = ++popupZIndex;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        if (dragState.active && dragState.element) {
+            const x = e.clientX - dragState.offsetX - dragState.parentLeft;
+            const y = e.clientY - dragState.offsetY - dragState.parentTop;
+            dragState.element.style.left = Math.max(0, x) + 'px';
+            dragState.element.style.top = Math.max(0, y) + 'px';
+        }
+        if (resizeState.active && resizeState.element) {
+            const rect = resizeState.element.getBoundingClientRect();
+            const w = e.clientX - rect.left;
+            const h = e.clientY - rect.top;
+            resizeState.element.style.width = Math.max(280, w) + 'px';
+            resizeState.element.style.height = Math.max(180, h) + 'px';
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        dragState.active = false;
+        resizeState.active = false;
+    });
+
+    // ===== RESIZING =====
+    let resizeState = { active: false, element: null };
+
+    function makeResizable(el) {}
+
+    function startResize(e, el) {
+        e.preventDefault();
+        e.stopPropagation();
+        resizeState = { active: true, element: el };
+    }
+
+    // ===== DRAG AND DROP =====
+    function dragStart(e, type) {
+        e.dataTransfer.setData('text/plain', type);
+    }
+
+    function dragOverHandler(e) {
+        e.preventDefault();
+    }
+
+    function dropHandler(e) {
+        e.preventDefault();
+        const type = e.dataTransfer.getData('text/plain');
+        if (type) {
+            openPopup(type);
+            // Position near drop
+            if (openPopups[type]) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                openPopups[type].style.left = (e.clientX - rect.left - 180) + 'px';
+                openPopups[type].style.top = (e.clientY - rect.top - 20) + 'px';
+            }
+        }
+    }
+
+    // ===== COMMAND PALETTE =====
+    function toggleCommandPalette() {
+        const overlay = document.getElementById('commandOverlay');
+        overlay.classList.toggle('show');
+        if (overlay.classList.contains('show')) {
+            document.getElementById('commandInput').focus();
+            document.getElementById('commandInput').value = '';
+            filterCommands('');
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            toggleCommandPalette();
+        }
+        if (e.key === 'Escape') {
+            document.getElementById('commandOverlay').classList.remove('show');
+            document.getElementById('notificationPanel').classList.remove('show');
+        }
+    });
+
+    document.getElementById('commandOverlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            toggleCommandPalette();
+        }
+    });
+
+    function filterCommands(query) {
+        const items = document.querySelectorAll('.command-item');
+        items.forEach(item => {
+            const text = item.querySelector('.command-item-text').textContent.toLowerCase();
+            item.style.display = text.includes(query.toLowerCase()) ? 'flex' : 'none';
+        });
+    }
+
+    function executeCommand(cmd) {
+        toggleCommandPalette();
+        switch(cmd) {
+            case 'home': navigateTo('student', 'home'); switchMode('student'); break;
+            case 'notes': navigateTo('student', 'notes'); switchMode('student'); break;
+            case 'calendar': openPopup('calendar'); break;
+            case 'pomodoro': openPopup('pomodoro'); break;
+            case 'ai': openPopup('ai'); break;
+            case 'dark': toggleTheme(); break;
+            case 'class': switchMode('class'); break;
+            case 'mental': navigateTo('student', 'mental'); switchMode('student'); break;
+        }
+    }
+
+    // ===== NOTIFICATIONS =====
+    function toggleNotifications() {
+        document.getElementById('notificationPanel').classList.toggle('show');
+    }
+
+    function clearNotifications() {
+        document.querySelectorAll('.notif-unread').forEach(el => el.classList.remove('notif-unread'));
+        const badge = document.querySelector('.notification-badge');
+        if (badge) badge.style.display = 'none';
+    }
+
+    // ===== POMODORO =====
+    function togglePomodoro() {
+        const btn = document.getElementById('pomodoroStartBtn');
+        if (pomodoroRunning) {
+            clearInterval(pomodoroInterval);
+            pomodoroRunning = false;
+            if (btn) btn.textContent = 'Resume';
+        } else {
+            pomodoroRunning = true;
+            if (btn) btn.textContent = 'Pause';
+            pomodoroInterval = setInterval(() => {
+                pomodoroSeconds--;
+                if (pomodoroSeconds <= 0) {
+                    clearInterval(pomodoroInterval);
+                    pomodoroRunning = false;
+                    if (btn) btn.textContent = 'Start';
+                    pomodoroSeconds = 25 * 60;
+                    alert('🍅 Pomodoro session complete! Time for a break.');
+                }
+                updatePomodoroDisplay();
+            }, 1000);
+        }
+    }
+
+    function resetPomodoro() {
+        clearInterval(pomodoroInterval);
+        pomodoroRunning = false;
+        pomodoroSeconds = 25 * 60;
+        updatePomodoroDisplay();
+        const btn = document.getElementById('pomodoroStartBtn');
+        if (btn) btn.textContent = 'Start';
+    }
+
+    function setPomodoroTime(mins) {
+        clearInterval(pomodoroInterval);
+        pomodoroRunning = false;
+        pomodoroSeconds = mins * 60;
+        updatePomodoroDisplay();
+        const btn = document.getElementById('pomodoroStartBtn');
+        if (btn) btn.textContent = 'Start';
+    }
+
+    function updatePomodoroDisplay() {
+        const timeEl = document.getElementById('pomodoroTime');
+        const ringEl = document.getElementById('pomodoroRing');
+        if (!timeEl) return;
+
+        const mins = Math.floor(pomodoroSeconds / 60);
+        const secs = pomodoroSeconds % 60;
+        timeEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        if (ringEl) {
+            const totalSeconds = 25 * 60;
+            const progress = pomodoroSeconds / totalSeconds;
+            const circumference = 2 * Math.PI * 70;
+            ringEl.setAttribute('stroke-dashoffset', circumference * (1 - progress));
+        }
+    }
+
+    // ===== AI CHAT =====
+    function sendAiMsg() {
+        const input = document.getElementById('aiInput');
+        if (!input || !input.value.trim()) return;
+
+        const messages = document.getElementById('aiMessages');
+        if (!messages) return;
+
+        // Add user message
+        const userMsg = document.createElement('div');
+        userMsg.className = 'ai-msg user';
+        userMsg.textContent = input.value;
+        messages.appendChild(userMsg);
+
+        const query = input.value.toLowerCase();
+        input.value = '';
+
+        // Simulate bot response
+        setTimeout(() => {
+            const botMsg = document.createElement('div');
+            botMsg.className = 'ai-msg bot';
+
+            if (query.includes('binary tree') || query.includes('tree')) {
+                botMsg.textContent = 'A binary tree is a tree data structure where each node has at most two children (left and right). Key operations include traversal (in-order, pre-order, post-order), insertion, and deletion. Time complexity for search is O(log n) for balanced trees. Would you like me to explain any specific traversal? 🌳';
+            } else if (query.includes('help') || query.includes('study')) {
+                botMsg.textContent = 'Based on your progress, I recommend focusing on Machine Learning (65%) and Computer Networks (71%). Want me to create a study plan for the week? I can also generate practice questions for weak topics! 📚';
+            } else {
+                botMsg.textContent = 'Great question! Let me think about that... I can help you with course concepts, study plans, practice problems, and exam preparation. What specific topic would you like to dive into? 🎓';
+            }
+
+            messages.appendChild(botMsg);
+            messages.scrollTop = messages.scrollHeight;
+        }, 800);
+    }
+
+    // ===== CHAT =====
+    function sendChat() {
+        const input = document.getElementById('chatInput');
+        if (!input || !input.value.trim()) return;
+
+        const messages = document.querySelector('.chat-messages');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-msg sent';
+        msgDiv.innerHTML = `
+            <div class="chat-avatar" style="background:var(--accent-primary)">AK</div>
+            <div>
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;text-align:right">You • Just now</div>
+                <div class="chat-bubble">${input.value}</div>
+            </div>
+        `;
+        messages.appendChild(msgDiv);
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    // ===== WELLNESS =====
+    function sendWellnessMsg() {
+        const input = document.getElementById('wellnessInput');
+        if (!input || !input.value.trim()) return;
+        alert('Wellness AI: Thank you for sharing. Remember, it\'s okay to take breaks. Your mental health is just as important as your grades. 💜');
+        input.value = '';
+    }
+
+    function selectMood(el, mood) {
+        document.querySelectorAll('.mood-option').forEach(m => m.classList.remove('selected'));
+        el.classList.add('selected');
+
+        const responses = {
+            great: 'Awesome! You\'re feeling great today! 🌟',
+            good: 'Good to hear you\'re feeling well! 😊',
+            okay: 'It\'s okay to feel neutral. How about a short walk? 🚶',
+            low: 'Sorry you\'re feeling low. Remember, it\'s temporary. 💙',
+            stressed: 'Feeling stressed? Try a breathing exercise or take a break. 🧘'
+        };
+        alert(responses[mood] || 'Mood recorded!');
+    }
+
+    // ===== FOCUS MODE =====
+    function enterFocusMode() {
+        document.getElementById('focusMode').classList.add('active');
+    }
+
+    function exitFocusMode() {
+        document.getElementById('focusMode').classList.remove('active');
+    }
+
+    // ===== INIT =====
+    switchMode('student');
+</script>
+
+</body>
+</html>

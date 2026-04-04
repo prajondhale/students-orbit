@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniHub</title>
+    <title>Orbit</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -17,31 +17,31 @@
             --bg-tertiary: #1a1a2e;
             --bg-card: rgba(26, 26, 46, 0.8);
             --bg-glass: rgba(26, 26, 46, 0.6);
-            --bg-hover: rgba(139, 92, 246, 0.1);
-            --border-color: rgba(139, 92, 246, 0.2);
-            --border-glow: rgba(139, 92, 246, 0.4);
+            --bg-hover: rgba(59, 130, 246, 0.1);
+            --border-color: rgba(59, 130, 246, 0.15);
+            --border-glow: rgba(59, 130, 246, 0.35);
             --text-primary: #e4e4e7;
             --text-secondary: #a1a1aa;
             --text-muted: #71717a;
-            --accent-primary: #8b5cf6;
-            --accent-secondary: #6366f1;
-            --accent-tertiary: #a78bfa;
-            --accent-cyan: #22d3ee;
-            --accent-green: #34d399;
-            --accent-orange: #fb923c;
-            --accent-pink: #f472b6;
-            --accent-red: #ef4444;
-            --accent-yellow: #fbbf24;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #2563eb;
+            --accent-tertiary: #60a5fa;
+            --accent-cyan: #60a5fa;
+            --accent-green: #3b82f6;
+            --accent-orange: #64748b;
+            --accent-pink: #64748b;
+            --accent-red: #dc2626;
+            --accent-yellow: #94a3b8;
             --shadow-color: rgba(0, 0, 0, 0.5);
             --glass-bg: rgba(26, 26, 46, 0.7);
-            --glass-border: rgba(139, 92, 246, 0.15);
+            --glass-border: rgba(59, 130, 246, 0.12);
             --scrollbar-track: #12121a;
             --scrollbar-thumb: #2d2d44;
             --nav-bg: rgba(18, 18, 26, 0.95);
             --resource-bg: rgba(10, 10, 15, 0.98);
             --popup-bg: rgba(20, 20, 35, 0.92);
             --input-bg: rgba(26, 26, 46, 0.5);
-            --badge-bg: rgba(139, 92, 246, 0.2);
+            --badge-bg: rgba(59, 130, 246, 0.15);
         }
 
         [data-theme="light"] {
@@ -50,31 +50,31 @@
             --bg-tertiary: #f1f3f9;
             --bg-card: rgba(255, 255, 255, 0.9);
             --bg-glass: rgba(255, 255, 255, 0.7);
-            --bg-hover: rgba(99, 102, 241, 0.08);
-            --border-color: rgba(99, 102, 241, 0.15);
-            --border-glow: rgba(99, 102, 241, 0.3);
-            --text-primary: #1e1b4b;
+            --bg-hover: rgba(59, 130, 246, 0.08);
+            --border-color: rgba(59, 130, 246, 0.12);
+            --border-glow: rgba(59, 130, 246, 0.25);
+            --text-primary: #0f172a;
             --text-secondary: #4b5563;
             --text-muted: #9ca3af;
-            --accent-primary: #6366f1;
-            --accent-secondary: #4f46e5;
-            --accent-tertiary: #818cf8;
-            --accent-cyan: #0891b2;
-            --accent-green: #059669;
-            --accent-orange: #ea580c;
-            --accent-pink: #db2777;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #2563eb;
+            --accent-tertiary: #60a5fa;
+            --accent-cyan: #3b82f6;
+            --accent-green: #3b82f6;
+            --accent-orange: #64748b;
+            --accent-pink: #64748b;
             --accent-red: #dc2626;
-            --accent-yellow: #d97706;
-            --shadow-color: rgba(99, 102, 241, 0.1);
+            --accent-yellow: #94a3b8;
+            --shadow-color: rgba(59, 130, 246, 0.08);
             --glass-bg: rgba(255, 255, 255, 0.8);
-            --glass-border: rgba(99, 102, 241, 0.12);
+            --glass-border: rgba(59, 130, 246, 0.1);
             --scrollbar-track: #f1f3f9;
-            --scrollbar-thumb: #c7d2fe;
+            --scrollbar-thumb: #bfdbfe;
             --nav-bg: rgba(255, 255, 255, 0.97);
             --resource-bg: rgba(248, 249, 252, 0.98);
             --popup-bg: rgba(255, 255, 255, 0.95);
             --input-bg: rgba(241, 243, 249, 0.8);
-            --badge-bg: rgba(99, 102, 241, 0.12);
+            --badge-bg: rgba(59, 130, 246, 0.1);
         }
 
         * {
@@ -103,13 +103,24 @@
             border-radius: 3px;
         }
 
+        
+        /* Hide number input spin buttons */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
         /* ===== TOP BAR ===== */
         .top-bar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 48px;
+            height: 52px;
             background: var(--nav-bg);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
@@ -207,7 +218,7 @@
         .mode-toggle-btn.active {
             background: var(--accent-primary);
             color: white;
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
         }
 
         .mode-toggle-btn:hover:not(.active) {
@@ -291,7 +302,7 @@
         .app-layout {
             display: flex;
             height: 100vh;
-            padding-top: 48px;
+            padding-top: 52px;
         }
 
         /* ===== RESOURCE BAR ===== */
@@ -446,7 +457,7 @@
             width: 36px;
             height: 36px;
             border-radius: 10px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -471,7 +482,7 @@
         .avatar-circle .life-bar-fill {
             height: 100%;
             border-radius: 2px;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
             transition: width 0.5s;
         }
 
@@ -511,13 +522,14 @@
         }
 
         .greeting-text {
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin-bottom: 4px;
         }
 
         .greeting-text .highlight {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -536,7 +548,7 @@
         /* ===== DASHBOARD GRID ===== */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 7fr 3fr;
             gap: 20px;
         }
 
@@ -567,8 +579,9 @@
         }
 
         .card-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
+            letter-spacing: -0.2px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -652,8 +665,8 @@
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 14px;
+            padding: 24px 16px;
             text-align: center;
             transition: all 0.3s;
             cursor: pointer;
@@ -666,8 +679,9 @@
         }
 
         .stat-value {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin-bottom: 4px;
         }
 
@@ -776,7 +790,7 @@
 
         .popup-panel.focused {
             border-color: var(--accent-primary);
-            box-shadow: 0 8px 40px var(--shadow-color), 0 0 20px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 8px 40px var(--shadow-color), 0 0 20px rgba(59, 130, 246, 0.1);
         }
 
         .popup-header {
@@ -814,19 +828,23 @@
         }
 
         .popup-ctrl {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
         }
 
-        .popup-ctrl.close { background: #ef4444; }
-        .popup-ctrl.minimize { background: #fbbf24; }
-        .popup-ctrl.maximize { background: #34d399; }
-
         .popup-ctrl:hover {
-            transform: scale(1.2);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            background: var(--bg-hover);
         }
 
         .popup-body {
@@ -1244,8 +1262,9 @@
         }
 
         .page-title {
-            font-size: 22px;
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .btn {
@@ -1402,17 +1421,21 @@
         }
 
         .mood-option {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: auto;
+            min-width: 48px;
+            height: 36px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 0 12px;
             cursor: pointer;
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             transition: all 0.2s;
             background: var(--bg-card);
+            color: var(--text-secondary);
         }
 
         .mood-option:hover {
@@ -1422,7 +1445,7 @@
 
         .mood-option.selected {
             border-color: var(--accent-primary);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         .weekly-chart {
@@ -1675,14 +1698,14 @@
 
         .iframe-placeholder svg {
             width: 48px;
-            height: 48px;
+            height: 52px;
             opacity: 0.3;
         }
 
         /* ===== NOTIFICATION PANEL ===== */
         .notification-panel {
             position: fixed;
-            top: 48px;
+            top: 52px;
             right: 0;
             width: 340px;
             max-height: 400px;
@@ -2024,7 +2047,7 @@
         .mood-cal-day.has-mood { border-color: var(--border-glow); }
         .mood-cal-day.today-mood {
             border-color: var(--accent-primary);
-            box-shadow: 0 0 10px rgba(139,92,246,0.2);
+            box-shadow: 0 0 10px rgba(59,130,246,0.2);
         }
         .mood-cal-day.empty-mood {
             background: transparent;
@@ -2105,7 +2128,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(180deg, rgba(251,191,36,0.3), rgba(251,191,36,0.6));
+            background: linear-gradient(180deg, rgba(59,130,246,0.2), rgba(59,130,246,0.4));
             transition: height 0.5s ease;
             display: flex;
             flex-wrap: wrap;
@@ -2117,9 +2140,9 @@
         .coin-icon {
             width: 18px;
             height: 18px;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             border-radius: 50%;
-            border: 1px solid #d97706;
+            border: 1px solid #1d4ed8;
             font-size: 10px;
             display: flex;
             align-items: center;
@@ -2137,7 +2160,7 @@
             margin-top: 12px;
         }
         .earn-stat { text-align: center; }
-        .earn-stat-val { font-size: 18px; font-weight: 700; color: var(--accent-yellow); }
+        .earn-stat-val { font-size: 18px; font-weight: 700; color: var(--accent-primary); }
         .earn-stat-label { font-size: 10px; color: var(--text-muted); }
 
         /* ===== KNOWLEDGE GRAPH CANVAS ===== */
@@ -2179,7 +2202,7 @@
         }
         .gravity-critical { background: rgba(239,68,68,0.15); color: var(--accent-red); }
         .gravity-high { background: rgba(251,146,60,0.15); color: var(--accent-orange); }
-        .gravity-medium { background: rgba(251,191,36,0.15); color: var(--accent-yellow); }
+        .gravity-medium { background: rgba(251,191,36,0.15); color: var(--accent-primary); }
 
         /* ===== RESOURCE SHELF ===== */
         .resource-shelf-grid {
@@ -2394,7 +2417,7 @@
         </button>
         <div class="logo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/><polyline points="2 15.5 12 8.5 22 15.5"/><line x1="12" y1="2" x2="12" y2="8.5"/></svg>
-            <div class="logo-text">Nexus-Uni <span>Scholar's Command Center</span></div>
+            <div class="logo-text">Orbit <span>Academic Command Center</span></div>
         </div>
         <div class="command-bar-trigger" onclick="toggleCommandPalette()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -2429,23 +2452,23 @@
         <span class="card-action" onclick="clearNotifications()">Mark all read</span>
     </div>
     <div class="notif-item notif-unread">
-        <div class="notif-item-title">📝 Assignment due: Data Structures Lab 3</div>
+        <div class="notif-item-title">Assignment due: Data Structures Lab 3</div>
         <div class="notif-item-time">2 hours ago</div>
     </div>
     <div class="notif-item notif-unread">
-        <div class="notif-item-title">🎓 Prof. Williams left feedback on your essay</div>
+        <div class="notif-item-title">Prof. Williams left feedback on your essay</div>
         <div class="notif-item-time">5 hours ago</div>
     </div>
     <div class="notif-item">
-        <div class="notif-item-title">🌲 Focus session completed: 25 min</div>
+        <div class="notif-item-title">Focus session completed: 25 min</div>
         <div class="notif-item-time">Yesterday</div>
     </div>
     <div class="notif-item">
-        <div class="notif-item-title">📊 Weekly progress report ready</div>
+        <div class="notif-item-title">Weekly progress report ready</div>
         <div class="notif-item-time">2 days ago</div>
     </div>
     <div class="notif-item">
-        <div class="notif-item-title">👥 New message in ML Project group</div>
+        <div class="notif-item-title">New message in ML Project group</div>
         <div class="notif-item-time">3 days ago</div>
     </div>
 </div>
@@ -2530,9 +2553,9 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
                     Lecture Resources
                 </div>
-                <div class="focus-resource-item" onclick="openPdfPreview('Binary Trees Formula Sheet')">📄 Binary Trees Formula Sheet <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
-                <div class="focus-resource-item" onclick="openPdfPreview('Traversal Algorithms Cheat Sheet')">📄 Traversal Algorithms Cheat Sheet <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
-                <div class="focus-resource-item" onclick="openPdfPreview('Time Complexity Reference')">📊 Time Complexity Reference <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
+                <div class="focus-resource-item" onclick="openPdfPreview('Binary Trees Formula Sheet')">Binary Trees Formula Sheet <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
+                <div class="focus-resource-item" onclick="openPdfPreview('Traversal Algorithms Cheat Sheet')">Traversal Algorithms Cheat Sheet <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
+                <div class="focus-resource-item" onclick="openPdfPreview('Time Complexity Reference')">Time Complexity Reference <span style="margin-left:auto;color:var(--accent-primary);font-size:10px">View PDF</span></div>
             </div>
         </div>
     </div>
@@ -2547,7 +2570,7 @@
         </div>
         <div class="pdf-preview-body">
             <div style="text-align:center">
-                <div style="font-size:48px;margin-bottom:12px">📄</div>
+                <div style="margin-bottom:12px"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                 <div style="font-size:16px;font-weight:600;margin-bottom:4px" id="pdfPreviewName">Document</div>
                 <div style="font-size:13px;color:var(--text-muted)">PDF preview would render here in production</div>
             </div>
@@ -2558,7 +2581,7 @@
 <!-- Journal Popup -->
 <div class="journal-popup-overlay" id="journalOverlay" onclick="if(event.target===this)closeJournal()">
     <div class="journal-popup">
-        <h3>📝 Journal — <span id="journalDate">Jan 15</span></h3>
+        <h3>Journal — <span id="journalDate">Jan 15</span></h3>
         <div id="journalMoodDisplay" style="font-size:13px;color:var(--text-secondary);margin-bottom:10px"></div>
         <textarea id="journalTextarea" placeholder="How was your day? Write your thoughts..."></textarea>
         <div style="display:flex;gap:8px;justify-content:flex-end">
@@ -2590,10 +2613,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span class="tooltip">Pomodoro Timer</span>
         </div>
-        <div class="resource-item" draggable="true" onclick="openPopup('earnFocus')" ondragstart="dragStart(event, 'earnFocus')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
-            <span class="tooltip">Earn Focus</span>
-        </div>
+        
     </div>
 
     <!-- RESOURCE BAR - CLASS MODE -->
@@ -2703,7 +2723,7 @@
     <!-- NAVIGATION BAR - TEACHER MODE -->
     <div class="nav-bar" id="navBar-teacher" style="display:none">
         <div class="nav-avatar">
-            <div class="avatar-circle" style="background:linear-gradient(135deg, var(--accent-orange), var(--accent-pink))">
+            <div class="avatar-circle" style="background:linear-gradient(135deg, #64748b, #475569)">
                 DW
             </div>
             <div class="avatar-info">
@@ -2752,7 +2772,7 @@
         <!-- ===== STUDENT HOME ===== -->
         <div class="page-view active" id="page-home">
             <div class="greeting-section animate-in">
-                <div class="greeting-text">Good evening, <span class="highlight">Alex</span> 👋</div>
+                <div class="greeting-text">Good evening, <span class="highlight">Alex</span></div>
                 <div class="greeting-sub">
                     <span class="greeting-date">Wednesday, Jan 15, 2025</span> — You have 3 tasks due today. Keep the momentum going!
                 </div>
@@ -2848,34 +2868,7 @@
                         </div>
                     </div>
 
-                    <div class="card animate-in" style="margin-top:16px">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                                Progress Overview
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>Data Structures</span><span>92%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:92%;background:linear-gradient(90deg,#8b5cf6,#a78bfa)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>Operating Systems</span><span>78%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:78%;background:linear-gradient(90deg,#22d3ee,#67e8f9)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>Machine Learning</span><span>65%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:65%;background:linear-gradient(90deg,#34d399,#6ee7b7)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>Software Engineering</span><span>88%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:88%;background:linear-gradient(90deg,#fb923c,#fdba74)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>Computer Networks</span><span>71%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:71%;background:linear-gradient(90deg,#f472b6,#f9a8d4)"></div></div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div>
@@ -2887,14 +2880,14 @@
                             </div>
                         </div>
                         <div class="achievement-grid">
-                            <div class="achievement-badge" style="background:rgba(139,92,246,0.2);border-color:var(--accent-primary)" title="Code Warrior">⚔️</div>
-                            <div class="achievement-badge" style="background:rgba(34,211,238,0.2);border-color:var(--accent-cyan)" title="Early Bird">🌅</div>
-                            <div class="achievement-badge" style="background:rgba(52,211,153,0.2);border-color:var(--accent-green)" title="Perfect Score">💯</div>
-                            <div class="achievement-badge" style="background:rgba(251,146,60,0.2);border-color:var(--accent-orange)" title="Team Player">🤝</div>
-                            <div class="achievement-badge locked" title="Locked">🔒</div>
-                            <div class="achievement-badge locked" title="Locked">🔒</div>
-                            <div class="achievement-badge locked" title="Locked">🔒</div>
-                            <div class="achievement-badge locked" title="Locked">🔒</div>
+                            <div class="achievement-badge" style="background:rgba(139,92,246,0.2);border-color:var(--accent-primary)" title="Code Warrior"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M14.5 12.5L18 9l4-4-4.5-4.5L9 9l3.5 3.5'/><path d='M14.5 12.5l-8 8-4 4 4.5 4.5 8-8'/></svg></div>
+                            <div class="achievement-badge" style="background:rgba(34,211,238,0.2);border-color:var(--accent-cyan)" title="Early Bird"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='4'/><path d='M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41'/></svg></div>
+                            <div class="achievement-badge" style="background:rgba(52,211,153,0.2);border-color:var(--accent-green)" title="Perfect Score"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/><polyline points='22 4 12 14.01 9 11.01'/></svg></div>
+                            <div class="achievement-badge" style="background:rgba(251,146,60,0.2);border-color:var(--accent-orange)" title="Team Player"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/></svg></div>
+                            <div class="achievement-badge locked" title="Locked"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='3' y='11' width='18' height='11' rx='2' ry='2'/><path d='M7 11V7a5 5 0 0 1 10 0v4'/></svg></div>
+                            <div class="achievement-badge locked" title="Locked"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='3' y='11' width='18' height='11' rx='2' ry='2'/><path d='M7 11V7a5 5 0 0 1 10 0v4'/></svg></div>
+                            <div class="achievement-badge locked" title="Locked"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='3' y='11' width='18' height='11' rx='2' ry='2'/><path d='M7 11V7a5 5 0 0 1 10 0v4'/></svg></div>
+                            <div class="achievement-badge locked" title="Locked"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='3' y='11' width='18' height='11' rx='2' ry='2'/><path d='M7 11V7a5 5 0 0 1 10 0v4'/></svg></div>
                         </div>
                     </div>
 
@@ -2930,19 +2923,7 @@
                         </div>
                     </div>
 
-                    <div class="card animate-in" style="margin-top:16px">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 14l3-6h-5l3-6H6l-3 8h5l-3 8h12z"/></svg>
-                                Earn Focus
-                            </div>
-                        </div>
-                        <div style="text-align:center;padding:10px">
-                            <div style="font-size:32px;margin-bottom:8px">🪙</div>
-                            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Earn coins by staying focused</div>
-                            <button class="btn primary" onclick="openPopup('earnFocus')">Start Earning</button>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -2966,23 +2947,23 @@
                         </div>
                         <div class="progress-item">
                             <div class="progress-label"><span>XP Progress</span><span>2,450 / 3,000</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:82%;background:linear-gradient(90deg,var(--accent-primary),var(--accent-cyan))"></div></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:82%;background:linear-gradient(90deg,var(--accent-primary),var(--accent-tertiary))"></div></div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header"><div class="card-title">🏆 Badges & Streaks</div></div>
+                    <div class="card-header"><div class="card-title">Badges & Streaks</div></div>
                     <div class="achievement-grid">
-                        <div class="achievement-badge" style="background:rgba(139,92,246,0.2);border-color:var(--accent-primary)">⚔️</div>
-                        <div class="achievement-badge" style="background:rgba(34,211,238,0.2);border-color:var(--accent-cyan)">🌅</div>
-                        <div class="achievement-badge" style="background:rgba(52,211,153,0.2);border-color:var(--accent-green)">💯</div>
-                        <div class="achievement-badge" style="background:rgba(251,146,60,0.2);border-color:var(--accent-orange)">🤝</div>
-                        <div class="achievement-badge" style="background:rgba(244,114,182,0.2);border-color:var(--accent-pink)">📚</div>
+                        <div class="achievement-badge" style="background:rgba(139,92,246,0.2);border-color:var(--accent-primary)"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M14.5 12.5L18 9l4-4-4.5-4.5L9 9l3.5 3.5'/><path d='M14.5 12.5l-8 8-4 4 4.5 4.5 8-8'/></svg></div>
+                        <div class="achievement-badge" style="background:rgba(34,211,238,0.2);border-color:var(--accent-cyan)"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='4'/><path d='M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41'/></svg></div>
+                        <div class="achievement-badge" style="background:rgba(52,211,153,0.2);border-color:var(--accent-green)"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/><polyline points='22 4 12 14.01 9 11.01'/></svg></div>
+                        <div class="achievement-badge" style="background:rgba(251,146,60,0.2);border-color:var(--accent-orange)"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/></svg></div>
+                        <div class="achievement-badge" style="background:rgba(244,114,182,0.2);border-color:var(--accent-pink)"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z'/><path d='M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z'/></svg></div>
                     </div>
                     <div style="margin-top:16px;font-size:13px;color:var(--text-secondary)">
-                        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-color)"><span>🔥 Current Streak</span><strong>4 days</strong></div>
-                        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-color)"><span>📈 Best Streak</span><strong>21 days</strong></div>
-                        <div style="display:flex;justify-content:space-between;padding:6px 0"><span>🌲 Trees Planted</span><strong>47</strong></div>
+                        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-color)"><span>Current Streak</span><strong>4 days</strong></div>
+                        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-color)"><span>Best Streak</span><strong>21 days</strong></div>
+                        <div style="display:flex;justify-content:space-between;padding:6px 0"><span>Focus Sessions</span><strong>47</strong></div>
                     </div>
                 </div>
             </div>
@@ -2991,7 +2972,7 @@
         <!-- ===== NOTES (Drive-like) ===== -->
         <div class="page-view" id="page-notes">
             <div class="page-header">
-                <div class="page-title">📁 Notes & Documents</div>
+                <div class="page-title">Notes & Documents</div>
                 <div style="display:flex;gap:8px">
                     <button class="btn" onclick="alert('Upload dialog would open')">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -3005,42 +2986,42 @@
             </div>
             <div class="drive-grid">
                 <div class="drive-item" onclick="alert('Opening DSA Notes folder')">
-                    <div class="drive-icon">📂</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
                     <div class="drive-name">DSA Notes</div>
                     <div class="drive-meta">12 files • 24 MB</div>
                 </div>
                 <div class="drive-item" onclick="alert('Opening OS Lectures folder')">
-                    <div class="drive-icon">📂</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
                     <div class="drive-name">OS Lectures</div>
                     <div class="drive-meta">8 files • 156 MB</div>
                 </div>
                 <div class="drive-item" onclick="alert('Opening ML Research folder')">
-                    <div class="drive-icon">📂</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
                     <div class="drive-name">ML Research</div>
                     <div class="drive-meta">5 files • 12 MB</div>
                 </div>
                 <div class="drive-item" onclick="alert('Opening file')">
-                    <div class="drive-icon">📄</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                     <div class="drive-name">Software_Design_Patterns.pdf</div>
                     <div class="drive-meta">2.4 MB • Modified today</div>
                 </div>
                 <div class="drive-item" onclick="alert('Opening file')">
-                    <div class="drive-icon">📝</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
                     <div class="drive-name">CN_Chapter5_Notes.md</div>
                     <div class="drive-meta">18 KB • Modified yesterday</div>
                 </div>
                 <div class="drive-item" onclick="alert('Opening file')">
-                    <div class="drive-icon">📊</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
                     <div class="drive-name">ML_Lab3_Results.xlsx</div>
                     <div class="drive-meta">340 KB • Jan 12</div>
                 </div>
                 <div class="drive-item" onclick="alert('Opening file')">
-                    <div class="drive-icon">🖼️</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
                     <div class="drive-name">System_Architecture_Diagram.png</div>
                     <div class="drive-meta">1.2 MB • Jan 10</div>
                 </div>
                 <div class="drive-item" onclick="alert('Opening file')">
-                    <div class="drive-icon">📄</div>
+                    <div class="drive-icon" style="font-size:20px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                     <div class="drive-name">Thesis_Draft_v2.docx</div>
                     <div class="drive-meta">890 KB • Jan 8</div>
                 </div>
@@ -3088,31 +3069,31 @@
             </div>
             <div class="chat-container">
                 <div style="display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:8px">
-                    <div class="quick-action-chip" style="background:var(--accent-primary);color:white;border-color:var(--accent-primary)">🤖 ML Project</div>
-                    <div class="quick-action-chip" onclick="alert('Switching channel')">📊 DSA Study Group</div>
-                    <div class="quick-action-chip" onclick="alert('Switching channel')">🎮 Gaming Club</div>
-                    <div class="quick-action-chip" onclick="alert('Switching channel')">📝 Thesis Team</div>
+                    <div class="quick-action-chip" style="background:var(--accent-primary);color:white;border-color:var(--accent-primary)">ML Project</div>
+                    <div class="quick-action-chip" onclick="alert('Switching channel')">DSA Study Group</div>
+                    <div class="quick-action-chip" onclick="alert('Switching channel')">Gaming Club</div>
+                    <div class="quick-action-chip" onclick="alert('Switching channel')">Thesis Team</div>
                 </div>
                 <div class="chat-messages">
                     <div class="chat-msg">
-                        <div class="chat-avatar" style="background:var(--accent-green)">SP</div>
+                        <div class="chat-avatar" style="background:#64748b">SP</div>
                         <div>
                             <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Sarah Park • 2:30 PM</div>
                             <div class="chat-bubble">Hey team! I just pushed the updated neural network model to the repo. Can someone review the training accuracy?</div>
                         </div>
                     </div>
                     <div class="chat-msg">
-                        <div class="chat-avatar" style="background:var(--accent-orange)">RJ</div>
+                        <div class="chat-avatar" style="background:#475569">RJ</div>
                         <div>
                             <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Raj Joshi • 2:45 PM</div>
                             <div class="chat-bubble">On it! The loss function looks much better now. I'll run the validation set tonight.</div>
                         </div>
                     </div>
                     <div class="chat-msg sent">
-                        <div class="chat-avatar" style="background:var(--accent-primary)">AK</div>
+                        <div class="chat-avatar" style="background:#64748b">AK</div>
                         <div>
                             <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;text-align:right">You • 3:00 PM</div>
-                            <div class="chat-bubble">Great work! I'll prepare the presentation slides for tomorrow's meeting with Prof. Williams. 🚀</div>
+                            <div class="chat-bubble">Great work! I'll prepare the presentation slides for tomorrow's meeting with Prof. Williams.</div>
                         </div>
                     </div>
                 </div>
@@ -3132,28 +3113,28 @@
                 <div>
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">🎯 How are you feeling today?</div>
+                            <div class="card-title">How are you feeling today?</div>
                         </div>
                         <div class="mood-grid">
-                            <div class="mood-option" onclick="selectMood(this, 'great')">😄</div>
-                            <div class="mood-option" onclick="selectMood(this, 'good')">🙂</div>
-                            <div class="mood-option" onclick="selectMood(this, 'okay')">😐</div>
-                            <div class="mood-option" onclick="selectMood(this, 'low')">😔</div>
-                            <div class="mood-option" onclick="selectMood(this, 'stressed')">😰</div>
+                            <div class="mood-option" onclick="selectMood(this, 'great')">Great</div>
+                            <div class="mood-option" onclick="selectMood(this, 'good')">Good</div>
+                            <div class="mood-option" onclick="selectMood(this, 'okay')">Okay</div>
+                            <div class="mood-option" onclick="selectMood(this, 'low')">Low</div>
+                            <div class="mood-option" onclick="selectMood(this, 'stressed')">Stress</div>
                         </div>
                     </div>
 
                     <div class="card" style="margin-top:16px">
                         <div class="card-header">
-                            <div class="card-title">📅 Monthly Mood Calendar</div>
+                            <div class="card-title">Monthly Mood Calendar</div>
                             <span class="card-action" id="moodCalMonth">January 2025</span>
                         </div>
                         <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
-                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😄')" title="Great">😄</span>
-                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('🙂')" title="Good">🙂</span>
-                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😐')" title="Okay">😐</span>
-                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😔')" title="Low">😔</span>
-                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('😰')" title="Stressed">😰</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('G')" title="Great" style="font-size:12px;padding:4px 8px;border:1px solid var(--border-color);border-radius:6px;background:var(--input-bg);color:var(--text-secondary)">Great</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('O')" title="Good" style="font-size:12px;padding:4px 8px;border:1px solid var(--border-color);border-radius:6px;background:var(--input-bg);color:var(--text-secondary)">Good</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('M')" title="Okay" style="font-size:12px;padding:4px 8px;border:1px solid var(--border-color);border-radius:6px;background:var(--input-bg);color:var(--text-secondary)">Okay</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('L')" title="Low" style="font-size:12px;padding:4px 8px;border:1px solid var(--border-color);border-radius:6px;background:var(--input-bg);color:var(--text-secondary)">Low</span>
+                            <span style="cursor:pointer;font-size:18px" onclick="setCalMood('S')" title="Stressed" style="font-size:12px;padding:4px 8px;border:1px solid var(--border-color);border-radius:6px;background:var(--input-bg);color:var(--text-secondary)">Stress</span>
                         </div>
                         <div id="selectedMoodLabel" style="text-align:center;font-size:11px;color:var(--accent-primary);margin-bottom:6px">Select a mood, then click a date</div>
                         <div class="mood-calendar-grid">
@@ -3167,7 +3148,7 @@
                 <div>
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">🤖 Wellness AI Support</div>
+                            <div class="card-title">Wellness AI Support</div>
                         </div>
                         <div class="ai-messages">
                             <div class="ai-msg bot">Hi Alex! I noticed your stress levels have been slightly elevated this week. Would you like some suggestions for relaxation techniques or study break activities? 💆‍♂️</div>
@@ -3180,12 +3161,12 @@
 
                     <div class="card" style="margin-top:16px">
                         <div class="card-header">
-                            <div class="card-title">💡 Daily Tips</div>
+                            <div class="card-title">Daily Tips</div>
                         </div>
                         <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
-                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">🧘 Try a 5-minute breathing exercise between study sessions</div>
-                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">💧 You've been studying for 2 hours — stay hydrated!</div>
-                            <div style="padding:8px 0">🌙 Aim for 7-8 hours of sleep for optimal memory retention</div>
+                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">Try a 5-minute breathing exercise between study sessions</div>
+                            <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">You've been studying for 2 hours — stay hydrated!</div>
+                            <div style="padding:8px 0">Aim for 7-8 hours of sleep for optimal memory retention</div>
                         </div>
                     </div>
                 </div>
@@ -3246,7 +3227,7 @@
 
                     <div class="card animate-in" style="margin-top:16px">
                         <div class="card-header">
-                            <div class="card-title">📋 Due Assignments</div>
+                            <div class="card-title">Due Assignments</div>
                         </div>
                         <div class="activity-item">
                             <div class="activity-icon" style="background:var(--accent-red)">
@@ -3274,33 +3255,30 @@
                 <div>
                     <div class="card animate-in">
                         <div class="card-header">
-                            <div class="card-title">📊 Subject Progress</div>
+                            <div class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+                                Task Gravity
+                            </div>
                         </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>🟣 Data Structures</span><span>92%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:92%;background:var(--accent-primary)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>🔵 Operating Systems</span><span>78%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:78%;background:var(--accent-cyan)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>🟢 Machine Learning</span><span>65%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:65%;background:var(--accent-green)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>🟠 Software Eng.</span><span>88%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:88%;background:var(--accent-orange)"></div></div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label"><span>🩷 Computer Networks</span><span>71%</span></div>
-                            <div class="progress-track"><div class="progress-fill" style="width:71%;background:var(--accent-pink)"></div></div>
+                        <div style="display:flex;flex-direction:column;gap:8px">
+                            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--input-bg);border-radius:8px;border-left:3px solid var(--accent-red)">
+                                <div><div style="font-size:12px;font-weight:600">Math Quiz</div><div style="font-size:10px;color:var(--text-muted)">Due Today</div></div>
+                                <span class="gravity-badge gravity-critical">Critical</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--input-bg);border-radius:8px;border-left:3px solid var(--accent-orange)">
+                                <div><div style="font-size:12px;font-weight:600">OS Lab Report</div><div style="font-size:10px;color:var(--text-muted)">Due Tomorrow</div></div>
+                                <span class="gravity-badge gravity-high">High</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--input-bg);border-radius:8px;border-left:3px solid var(--accent-yellow)">
+                                <div><div style="font-size:12px;font-weight:600">ML Project</div><div style="font-size:10px;color:var(--text-muted)">Due in 3 days</div></div>
+                                <span class="gravity-badge gravity-medium">Medium</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card animate-in" style="margin-top:16px">
                         <div class="card-header">
-                            <div class="card-title">📢 Announcements</div>
+                            <div class="card-title">Announcements</div>
                         </div>
                         <div style="font-size:13px;color:var(--text-secondary)">
                             <div style="padding:8px 0;border-bottom:1px solid var(--border-color)">
@@ -3361,13 +3339,13 @@
                 <div class="page-title">Priority Hub</div>
             </div>
             <div class="card" style="margin-bottom:16px">
-                <div class="card-header"><div class="card-title">🎯 Focus Recommendations</div></div>
+                <div class="card-header"><div class="card-title">Focus Recommendations</div></div>
                 <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">Based on your marks and progress, here's where you should focus more:</p>
                 <div class="priority-card">
                     <div class="priority-rank" style="background:var(--accent-red)">1</div>
                     <div class="priority-info">
                         <div class="priority-subject">Machine Learning — 65%</div>
-                        <div class="priority-reason">⚠️ Below average. Focus on neural networks and backpropagation concepts.</div>
+                        <div class="priority-reason">Below average. Focus on neural networks and backpropagation concepts.</div>
                     </div>
                     <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:65%;background:var(--accent-red)"></div></div>
                 </div>
@@ -3391,7 +3369,7 @@
                     <div class="priority-rank" style="background:var(--accent-green)">4</div>
                     <div class="priority-info">
                         <div class="priority-subject">Software Engineering — 88%</div>
-                        <div class="priority-reason">✅ On track! Maintain consistency.</div>
+                        <div class="priority-reason">On track! Maintain consistency.</div>
                     </div>
                     <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:88%;background:var(--accent-green)"></div></div>
                 </div>
@@ -3399,46 +3377,13 @@
                     <div class="priority-rank" style="background:var(--accent-cyan)">5</div>
                     <div class="priority-info">
                         <div class="priority-subject">Data Structures — 92%</div>
-                        <div class="priority-reason">🌟 Excellent! You're ahead of the class.</div>
+                        <div class="priority-reason">Excellent! You're ahead of the class.</div>
                     </div>
                     <div class="progress-track" style="width:80px"><div class="progress-fill" style="width:92%;background:var(--accent-cyan)"></div></div>
                 </div>
             </div>
 
-            <div class="card" style="margin-top:16px">
-                <div class="card-header"><div class="card-title">🌀 Task Gravity System</div></div>
-                <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Tasks ranked by urgency weight — higher gravity = needs immediate attention</p>
-                <div class="priority-card" style="border-left:3px solid var(--accent-red)">
-                    <div style="flex:1">
-                        <div style="font-size:13px;font-weight:600">Math Quiz — Due Today (25% weight)</div>
-                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Machine Learning • Prof. Williams</div>
-                    </div>
-                    <div style="text-align:right">
-                        <div style="font-family:'JetBrains Mono';font-size:18px;font-weight:700;color:var(--accent-red)">95°</div>
-                        <span class="gravity-badge gravity-critical">Critical</span>
-                    </div>
-                </div>
-                <div class="priority-card" style="border-left:3px solid var(--accent-orange)">
-                    <div style="flex:1">
-                        <div style="font-size:13px;font-weight:600">OS Lab Report — Due Tomorrow (20% weight)</div>
-                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Operating Systems • Dr. Wilson</div>
-                    </div>
-                    <div style="text-align:right">
-                        <div style="font-family:'JetBrains Mono';font-size:18px;font-weight:700;color:var(--accent-orange)">78°</div>
-                        <span class="gravity-badge gravity-high">High</span>
-                    </div>
-                </div>
-                <div class="priority-card" style="border-left:3px solid var(--accent-yellow)">
-                    <div style="flex:1">
-                        <div style="font-size:13px;font-weight:600">ML Project Phase 2 — Due in 3 days (30% weight)</div>
-                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Machine Learning • Team Project</div>
-                    </div>
-                    <div style="text-align:right">
-                        <div style="font-family:'JetBrains Mono';font-size:18px;font-weight:700;color:var(--accent-yellow)">52°</div>
-                        <span class="gravity-badge gravity-medium">Medium</span>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
         <!-- ===== GROUP PROJECTS ===== -->
@@ -3452,7 +3397,7 @@
             </div>
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-name">🤖 Neural Network Image Classifier</div>
+                    <div class="project-name">Neural Network Image Classifier</div>
                     <div style="font-size:11px;color:var(--accent-green);font-weight:600">75% Complete</div>
                 </div>
                 <div class="progress-track" style="margin-bottom:12px"><div class="progress-fill" style="width:75%;background:var(--accent-green)"></div></div>
@@ -3472,7 +3417,7 @@
             </div>
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-name">🌐 Distributed File System</div>
+                    <div class="project-name">Distributed File System</div>
                     <div style="font-size:11px;color:var(--accent-orange);font-weight:600">40% Complete</div>
                 </div>
                 <div class="progress-track" style="margin-bottom:12px"><div class="progress-fill" style="width:40%;background:var(--accent-orange)"></div></div>
@@ -3509,32 +3454,32 @@
             </div>
             <div class="resource-shelf-grid" id="resourceShelfGrid">
                 <div class="resource-shelf-card" data-type="pdf" onclick="openPdfPreview('DSA Chapter 5 — Trees & Graphs')">
-                    <div class="resource-shelf-icon" style="background:rgba(239,68,68,0.15)">📄</div>
+                    <div class="resource-shelf-icon" style="background:rgba(59,130,246,0.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                     <div class="resource-shelf-name">DSA Chapter 5 — Trees & Graphs</div>
                     <div class="resource-shelf-meta">PDF • Dr. Sarah Chen • 2.4 MB</div>
                 </div>
                 <div class="resource-shelf-card" data-type="slides" onclick="openPdfPreview('ML Lecture 8 — Neural Networks')">
-                    <div class="resource-shelf-icon" style="background:rgba(251,146,60,0.15)">📊</div>
+                    <div class="resource-shelf-icon" style="background:rgba(59,130,246,0.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
                     <div class="resource-shelf-name">ML Lecture 8 — Neural Networks</div>
                     <div class="resource-shelf-meta">PPTX • Prof. Williams • 5.1 MB</div>
                 </div>
                 <div class="resource-shelf-card" data-type="pdf" onclick="openPdfPreview('OS Process Scheduling Notes')">
-                    <div class="resource-shelf-icon" style="background:rgba(34,211,238,0.15)">📄</div>
+                    <div class="resource-shelf-icon" style="background:rgba(59,130,246,0.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                     <div class="resource-shelf-name">OS Process Scheduling Notes</div>
                     <div class="resource-shelf-meta">PDF • Dr. Wilson • 1.8 MB</div>
                 </div>
                 <div class="resource-shelf-card" data-type="video" onclick="alert('Playing video...')">
-                    <div class="resource-shelf-icon" style="background:rgba(52,211,153,0.15)">🎬</div>
+                    <div class="resource-shelf-icon" style="background:rgba(59,130,246,0.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
                     <div class="resource-shelf-name">Sorting Algorithms Visualized</div>
                     <div class="resource-shelf-meta">MP4 • 15 min • 45 MB</div>
                 </div>
                 <div class="resource-shelf-card" data-type="notes" onclick="openPdfPreview('Computer Networks Formula Sheet')">
-                    <div class="resource-shelf-icon" style="background:rgba(244,114,182,0.15)">📝</div>
+                    <div class="resource-shelf-icon" style="background:rgba(59,130,246,0.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
                     <div class="resource-shelf-name">Computer Networks Formula Sheet</div>
                     <div class="resource-shelf-meta">PDF • Dr. Lee • 0.5 MB</div>
                 </div>
                 <div class="resource-shelf-card" data-type="pdf" onclick="openPdfPreview('Software Eng — Design Patterns')">
-                    <div class="resource-shelf-icon" style="background:rgba(139,92,246,0.15)">📄</div>
+                    <div class="resource-shelf-icon" style="background:rgba(59,130,246,0.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                     <div class="resource-shelf-name">Software Eng — Design Patterns</div>
                     <div class="resource-shelf-meta">PDF • Dr. Davis • 3.2 MB</div>
                 </div>
@@ -3605,7 +3550,7 @@
         <!-- ===== TEACHER HOME ===== -->
         <div class="page-view" id="page-teacherHome">
             <div class="greeting-section animate-in">
-                <div class="greeting-text">Welcome, <span class="highlight">Dr. Williams</span> 🎓</div>
+                <div class="greeting-text">Welcome, <span class="highlight">Dr. Williams</span></div>
                 <div class="greeting-sub">
                     <span class="greeting-date">Wednesday, Jan 15, 2025</span> — You have 3 lectures and 12 pending assignments to review today.
                 </div>
@@ -3630,60 +3575,15 @@
                 </div>
             </div>
 
-            <div class="teacher-grid animate-in">
-                <div class="teacher-action-card" onclick="navigateTo('teacher', 'attendance')">
-                    <div class="teacher-icon" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
-                    </div>
-                    <div class="teacher-card-title">Take Attendance</div>
-                    <div class="teacher-card-desc">Mark student attendance for today's class</div>
-                </div>
-                <div class="teacher-action-card" onclick="navigateTo('teacher', 'createLecture')">
-                    <div class="teacher-icon" style="background:linear-gradient(135deg,#22d3ee,#0891b2)">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-                    </div>
-                    <div class="teacher-card-title">Create Lecture</div>
-                    <div class="teacher-card-desc">Schedule or start a new lecture session</div>
-                </div>
-                <div class="teacher-action-card" onclick="navigateTo('teacher', 'uploadAssignment')">
-                    <div class="teacher-icon" style="background:linear-gradient(135deg,#34d399,#059669)">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    </div>
-                    <div class="teacher-card-title">Upload Assignment</div>
-                    <div class="teacher-card-desc">Create and distribute assignments</div>
-                </div>
-                <div class="teacher-action-card" onclick="navigateTo('teacher', 'giveMarks')">
-                    <div class="teacher-icon" style="background:linear-gradient(135deg,#fb923c,#ea580c)">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                    </div>
-                    <div class="teacher-card-title">Give Marks</div>
-                    <div class="teacher-card-desc">Grade assignments and exams</div>
-                </div>
-                <div class="teacher-action-card" onclick="navigateTo('teacher', 'createFeedback')">
-                    <div class="teacher-icon" style="background:linear-gradient(135deg,#f472b6,#db2777)">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    </div>
-                    <div class="teacher-card-title">Create Feedback</div>
-                    <div class="teacher-card-desc">Provide feedback to students</div>
-                </div>
-                <div class="teacher-action-card" onclick="navigateTo('teacher', 'resolveQueries')">
-                    <div class="teacher-icon" style="background:linear-gradient(135deg,#fbbf24,#d97706)">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    </div>
-                    <div class="teacher-card-title">Resolve Queries</div>
-                    <div class="teacher-card-desc">Answer student questions</div>
-                </div>
-            </div>
-
             <div class="dashboard-grid" style="margin-top:20px">
                 <div style="grid-column:1/2">
                     <div class="card animate-in">
                         <div class="card-header">
-                            <div class="card-title">🔔 Reminders</div>
+                            <div class="card-title">Reminders</div>
                             <span class="card-action">Add New</span>
                         </div>
                         <div class="reminder-item">
-                            <div class="reminder-icon" style="background:rgba(239,68,68,0.15)">🎓</div>
+                            <div class="reminder-icon" style="background:rgba(59,130,246,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg></div>
                             <div class="reminder-content">
                                 <div class="reminder-title">Lecture at 3 PM</div>
                                 <div class="reminder-time">Machine Learning — Lab 5</div>
@@ -3691,7 +3591,7 @@
                             <span class="gravity-badge gravity-critical">Soon</span>
                         </div>
                         <div class="reminder-item">
-                            <div class="reminder-icon" style="background:rgba(251,146,60,0.15)">📝</div>
+                            <div class="reminder-icon" style="background:rgba(59,130,246,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
                             <div class="reminder-content">
                                 <div class="reminder-title">Give marks for DSA Lab #3</div>
                                 <div class="reminder-time">12 submissions pending</div>
@@ -3699,7 +3599,7 @@
                             <span class="gravity-badge gravity-high">Today</span>
                         </div>
                         <div class="reminder-item">
-                            <div class="reminder-icon" style="background:rgba(139,92,246,0.15)">✅</div>
+                            <div class="reminder-icon" style="background:rgba(59,130,246,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
                             <div class="reminder-content">
                                 <div class="reminder-title">Mark attendance for OS class</div>
                                 <div class="reminder-time">Section A — 42 students</div>
@@ -3711,7 +3611,7 @@
                 <div>
                     <div class="card animate-in" style="margin-bottom:16px">
                         <div class="card-header">
-                            <div class="card-title">🎥 Quick Actions</div>
+                            <div class="card-title">Quick Actions</div>
                         </div>
                         <div style="text-align:center;padding:16px">
                             <button class="btn primary" style="width:100%;padding:14px;font-size:15px;font-weight:600" onclick="enterFocusMode()">
@@ -3723,7 +3623,7 @@
                     </div>
                     <div class="card animate-in">
                         <div class="card-header">
-                            <div class="card-title">❓ Student Queries</div>
+                            <div class="card-title">Student Queries</div>
                         </div>
                         <div style="text-align:center;padding:12px">
                             <div style="font-size:28px;font-weight:800;color:var(--accent-orange);margin-bottom:4px">3</div>
@@ -3811,7 +3711,7 @@
                 <div class="form-group">
                     <label class="form-label">Attach Files</label>
                     <div style="border:2px dashed var(--border-color);border-radius:10px;padding:30px;text-align:center;cursor:pointer" onclick="alert('File picker would open')">
-                        <div style="font-size:28px;margin-bottom:8px">📎</div>
+                        <div style="margin-bottom:8px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></div>
                         <div style="font-size:13px;color:var(--text-muted)">Drag files here or click to browse</div>
                     </div>
                 </div>
@@ -3887,7 +3787,7 @@
                 <div class="form-group">
                     <label class="form-label">Upload Files</label>
                     <div style="border:2px dashed var(--border-color);border-radius:10px;padding:30px;text-align:center;cursor:pointer" onclick="alert('File picker would open')">
-                        <div style="font-size:28px;margin-bottom:8px">📁</div>
+                        <div style="margin-bottom:8px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
                         <div style="font-size:13px;color:var(--text-muted)">Drag files here or click to browse</div>
                         <div style="font-size:11px;color:var(--text-muted);margin-top:4px">PDF, PPTX, DOCX, MP4 up to 500MB</div>
                     </div>
@@ -4025,7 +3925,7 @@
     function getPopupContent(type) {
         const configs = {
             calendar: {
-                title: '📅 Calendar',
+                title: 'Calendar',
                 body: `
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
                         <button class="pomo-btn" onclick="alert('Previous month')">◀</button>
@@ -4048,7 +3948,7 @@
                 `
             },
             knowledge: {
-                title: '🌐 Knowledge Graph',
+                title: 'Knowledge Graph',
                 body: `
                     <div class="kg-visual">
                         <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Your connected topics</div>
@@ -4068,10 +3968,10 @@
                 `
             },
             ai: {
-                title: '🤖 AI Assistant',
+                title: 'AI Assistant',
                 body: `
                     <div class="ai-messages" id="aiMessages">
-                        <div class="ai-msg bot">Hello Alex! I'm your study assistant. Ask me anything about your courses, request explanations, or get study recommendations. How can I help? 🎓</div>
+                        <div class="ai-msg bot">Hello Alex! I'm your study assistant. Ask me anything about your courses, request explanations, or get study recommendations. How can I help?</div>
                     </div>
                     <div class="ai-input-area">
                         <input type="text" class="ai-input" placeholder="Ask me anything..." id="aiInput" onkeydown="if(event.key==='Enter')sendAiMsg()">
@@ -4080,7 +3980,7 @@
                 `
             },
             pomodoro: {
-                title: '🍅 Pomodoro Timer',
+                title: 'Pomodoro Timer',
                 body: `
                     <div style="text-align:center">
                         <div class="pomodoro-circle" id="pomodoroCircle">
@@ -4106,26 +4006,26 @@
                 `
             },
             forest: {
-                title: '🌲 Forest Focus',
+                title: 'Forest Focus',
                 body: `
                     <div class="forest-display">
                         <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Your Focus Forest</div>
                         <div class="tree-grid">
-                            <div class="tree-cell">🌲</div>
-                            <div class="tree-cell">🌳</div>
-                            <div class="tree-cell">🌲</div>
-                            <div class="tree-cell">🌴</div>
-                            <div class="tree-cell">🌲</div>
-                            <div class="tree-cell">🌳</div>
-                            <div class="tree-cell">🌲</div>
-                            <div class="tree-cell">🌴</div>
-                            <div class="tree-cell">🌲</div>
-                            <div class="tree-cell">🌳</div>
-                            <div class="tree-cell">🌲</div>
-                            <div class="tree-cell">🌲</div>
-                            <div class="tree-cell empty">🌱</div>
-                            <div class="tree-cell empty">🌱</div>
-                            <div class="tree-cell empty">🌱</div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.5"><path d="M12 2L7 10h10L12 2z"/><path d="M5 14h14l-7 8-7-8z"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+                            <div class="tree-cell empty"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M12 22V8"/><path d="M5 12s2.5-5 7-5 7 5 7 5"/></svg></div>
+                            <div class="tree-cell empty"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M12 22V8"/><path d="M5 12s2.5-5 7-5 7 5 7 5"/></svg></div>
+                            <div class="tree-cell empty"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M12 22V8"/><path d="M5 12s2.5-5 7-5 7 5 7 5"/></svg></div>
                         </div>
                         <div class="forest-stats">
                             <div class="forest-stat">
@@ -4141,12 +4041,12 @@
                                 <div class="forest-stat-label">Dead Trees</div>
                             </div>
                         </div>
-                        <button class="pomo-btn primary" style="margin-top:14px" onclick="alert('Starting focus session — plant a tree!')">🌱 Plant a Tree</button>
+                        <button class="pomo-btn primary" style="margin-top:14px" onclick="alert('Starting focus session — plant a tree!')">Start Focus</button>
                     </div>
                 `
             },
             profFeedback: {
-                title: '💬 Professor Feedback',
+                title: 'Professor Feedback',
                 body: `
                     <div style="display:flex;flex-direction:column;gap:12px">
                         <div style="padding:12px;background:var(--input-bg);border-radius:10px;border-left:3px solid var(--accent-green)">
@@ -4168,7 +4068,7 @@
                 `
             },
             subjectHealth: {
-                title: '📊 Subject Health',
+                title: 'Subject Health',
                 body: `
                     <div class="subject-card subject-3d" onclick="this.classList.toggle('expanded')">
                         <div class="subject-header">
@@ -4220,9 +4120,9 @@
             <div class="popup-header" onmousedown="startDrag(event, this.parentElement)">
                 <div class="popup-title">${config.title}</div>
                 <div class="popup-controls">
-                    <div class="popup-ctrl minimize" onclick="minimizePopup('${type}')"></div>
-                    <div class="popup-ctrl maximize" onclick="maximizePopup('${type}')"></div>
-                    <div class="popup-ctrl close" onclick="closePopup('${type}')"></div>
+                    <div class="popup-ctrl" onclick="minimizePopup('${type}')" title="Minimize"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                    <div class="popup-ctrl" onclick="maximizePopup('${type}')" title="Maximize"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+                    <div class="popup-ctrl" onclick="closePopup('${type}')" title="Close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
                 </div>
             </div>
             <div class="popup-body">${config.body}</div>
@@ -4441,7 +4341,7 @@
                     pomodoroRunning = false;
                     if (btn) btn.textContent = 'Start';
                     pomodoroSeconds = 25 * 60;
-                    alert('🍅 Pomodoro session complete! Time for a break.');
+                    alert('Pomodoro session complete! Time for a break.');
                 }
                 updatePomodoroDisplay();
             }, 1000);
@@ -4506,11 +4406,11 @@
             botMsg.className = 'ai-msg bot';
 
             if (query.includes('binary tree') || query.includes('tree')) {
-                botMsg.textContent = 'A binary tree is a tree data structure where each node has at most two children (left and right). Key operations include traversal (in-order, pre-order, post-order), insertion, and deletion. Time complexity for search is O(log n) for balanced trees. Would you like me to explain any specific traversal? 🌳';
+                botMsg.textContent = 'A binary tree is a tree data structure where each node has at most two children (left and right). Key operations include traversal (in-order, pre-order, post-order), insertion, and deletion. Time complexity for search is O(log n) for balanced trees. Would you like me to explain any specific traversal?';
             } else if (query.includes('help') || query.includes('study')) {
-                botMsg.textContent = 'Based on your progress, I recommend focusing on Machine Learning (65%) and Computer Networks (71%). Want me to create a study plan for the week? I can also generate practice questions for weak topics! 📚';
+                botMsg.textContent = 'Based on your progress, I recommend focusing on Machine Learning (65%) and Computer Networks (71%). Want me to create a study plan for the week? I can also generate practice questions for weak topics!';
             } else {
-                botMsg.textContent = 'Great question! Let me think about that... I can help you with course concepts, study plans, practice problems, and exam preparation. What specific topic would you like to dive into? 🎓';
+                botMsg.textContent = 'Great question! Let me think about that... I can help you with course concepts, study plans, practice problems, and exam preparation. What specific topic would you like to dive into?';
             }
 
             messages.appendChild(botMsg);
@@ -4527,7 +4427,7 @@
         const msgDiv = document.createElement('div');
         msgDiv.className = 'chat-msg sent';
         msgDiv.innerHTML = `
-            <div class="chat-avatar" style="background:var(--accent-primary)">AK</div>
+            <div class="chat-avatar" style="background:#64748b">AK</div>
             <div>
                 <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;text-align:right">You • Just now</div>
                 <div class="chat-bubble">${input.value}</div>
@@ -4542,7 +4442,7 @@
     function sendWellnessMsg() {
         const input = document.getElementById('wellnessInput');
         if (!input || !input.value.trim()) return;
-        alert('Wellness AI: Thank you for sharing. Remember, it\'s okay to take breaks. Your mental health is just as important as your grades. 💜');
+        alert('Wellness AI: Thank you for sharing. Remember, it\'s okay to take breaks. Your mental health is just as important as your grades.');
         input.value = '';
     }
 
@@ -4551,11 +4451,11 @@
         el.classList.add('selected');
 
         const responses = {
-            great: 'Awesome! You\'re feeling great today! 🌟',
-            good: 'Good to hear you\'re feeling well! 😊',
-            okay: 'It\'s okay to feel neutral. How about a short walk? 🚶',
-            low: 'Sorry you\'re feeling low. Remember, it\'s temporary. 💙',
-            stressed: 'Feeling stressed? Try a breathing exercise or take a break. 🧘'
+            great: 'Awesome! You\'re feeling great today!',
+            good: 'Good to hear you\'re feeling well!',
+            okay: 'It\'s okay to feel neutral. How about a short walk?',
+            low: 'Sorry you\'re feeling low. Remember, it\'s temporary.',
+            stressed: 'Feeling stressed? Try a breathing exercise or take a break.'
         };
         alert(responses[mood] || 'Mood recorded!');
     }
@@ -4691,7 +4591,7 @@
     }
 
     // Pre-fill some mood data
-    moodData[3] = '😄'; moodData[7] = '🙂'; moodData[10] = '😐'; moodData[12] = '😄'; moodData[14] = '😔';
+    moodData[3] = 'G'; moodData[7] = 'O'; moodData[10] = 'M'; moodData[12] = 'G'; moodData[14] = 'L';
 
     // ===== EARN FOCUS (replaces Forest Focus) =====
     let earnedCoins = 47;
@@ -4832,8 +4732,8 @@
             }
             const fillHeight = Math.min(95, (coinCount / 100) * 100);
             const config = {
-                title: '🪙 Earn Focus',
-                body: '<div class="earn-focus-container"><div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Complete focus sessions to earn coins</div><div class="glass-jar"><div class="glass-jar-fill" style="height:'+fillHeight+'%">'+coinsHtml+'</div></div><div class="earn-stats"><div class="earn-stat"><div class="earn-stat-val">'+coinCount+'</div><div class="earn-stat-label">Total Coins</div></div><div class="earn-stat"><div class="earn-stat-val">19.5h</div><div class="earn-stat-label">Total Focus</div></div><div class="earn-stat"><div class="earn-stat-val">4</div><div class="earn-stat-label">Today</div></div></div><button class="pomo-btn primary" style="margin-top:14px" onclick="earnCoin()">🪙 Start Focus Session</button></div>'
+                title: 'Earn Focus',
+                body: '<div class="earn-focus-container"><div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Complete focus sessions to earn coins</div><div class="glass-jar"><div class="glass-jar-fill" style="height:'+fillHeight+'%">'+coinsHtml+'</div></div><div class="earn-stats"><div class="earn-stat"><div class="earn-stat-val">'+coinCount+'</div><div class="earn-stat-label">Total Coins</div></div><div class="earn-stat"><div class="earn-stat-val">19.5h</div><div class="earn-stat-label">Total Focus</div></div><div class="earn-stat"><div class="earn-stat-val">4</div><div class="earn-stat-label">Today</div></div></div><button class="pomo-btn primary" style="margin-top:14px" onclick="earnCoin()">Start Focus Session</button></div>'
             };
             return '<div class="popup-header" onmousedown="startDrag(event, this.parentElement)"><div class="popup-title">'+config.title+'</div><div class="popup-controls"><div class="popup-ctrl minimize" onclick="minimizePopup(\''+type+'\')"></div><div class="popup-ctrl maximize" onclick="maximizePopup(\''+type+'\')"></div><div class="popup-ctrl close" onclick="closePopup(\''+type+'\')"></div></div></div><div class="popup-body">'+config.body+'</div><div class="popup-resize" onmousedown="startResize(event, this.parentElement)"></div>';
         }

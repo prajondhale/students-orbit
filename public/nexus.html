@@ -4738,14 +4738,14 @@
             return '<div class="popup-header" onmousedown="startDrag(event, this.parentElement)"><div class="popup-title">'+config.title+'</div><div class="popup-controls"><div class="popup-ctrl minimize" onclick="minimizePopup(\''+type+'\')"></div><div class="popup-ctrl maximize" onclick="maximizePopup(\''+type+'\')"></div><div class="popup-ctrl close" onclick="closePopup(\''+type+'\')"></div></div></div><div class="popup-body">'+config.body+'</div><div class="popup-resize" onmousedown="startResize(event, this.parentElement)"></div>';
         }
         if (type === 'knowledge') {
-            return '<div class="popup-header" onmousedown="startDrag(event, this.parentElement)"><div class="popup-title">🌐 Knowledge Graph</div><div class="popup-controls"><div class="popup-ctrl minimize" onclick="minimizePopup(\'knowledge\')"></div><div class="popup-ctrl maximize" onclick="maximizePopup(\'knowledge\')"></div><div class="popup-ctrl close" onclick="closePopup(\'knowledge\')"></div></div></div><div class="popup-body" style="padding:0"><div class="kg-canvas-container"><canvas id="kgCanvas"></canvas><div class="kg-info-panel">Click a node to explore</div></div></div><div class="popup-resize" onmousedown="startResize(event, this.parentElement)"></div>';
+            return '<div class="popup-header" onmousedown="startDrag(event, this.parentElement)"><div class="popup-title">Knowledge Graph</div><div class="popup-controls"><div class="popup-ctrl minimize" onclick="minimizePopup(\'knowledge\')"></div><div class="popup-ctrl maximize" onclick="maximizePopup(\'knowledge\')"></div><div class="popup-ctrl close" onclick="closePopup(\'knowledge\')"></div></div></div><div class="popup-body" style="padding:0"><div class="kg-canvas-container"><canvas id="kgCanvas"></canvas><div class="kg-info-panel">Click a node to explore</div></div></div><div class="popup-resize" onmousedown="startResize(event, this.parentElement)"></div>';
         }
         return originalGetPopupContent(type);
     };
 
     function earnCoin() {
         earnedCoins++;
-        alert('🪙 Focus session started! Coin earned. Total: ' + earnedCoins);
+        alert('Focus session started! Coin earned. Total: ' + earnedCoins);
         closePopup('earnFocus');
         openPopup('earnFocus');
     }
